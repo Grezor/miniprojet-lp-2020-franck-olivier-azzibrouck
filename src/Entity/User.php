@@ -56,6 +56,11 @@ class User implements UserInterface
      */
     private $dossiers;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Formule::class, inversedBy="users")
+     */
+    private $formule;
+
     public function __construct()
     {
         $this->dossiers = new ArrayCollection();
@@ -201,6 +206,18 @@ class User implements UserInterface
                 $dossier->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFormule(): ?Formule
+    {
+        return $this->formule;
+    }
+
+    public function setFormule(?Formule $formule): self
+    {
+        $this->formule = $formule;
 
         return $this;
     }
