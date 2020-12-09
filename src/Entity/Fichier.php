@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\FichierRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +32,16 @@ class Fichier
      * @ORM\ManyToOne(targetEntity=Dossier::class, inversedBy="fichiers")
      */
     private $dossier;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $taille;
+
+    public function __construct()
+    {
+        $this->date= new DateTime('now');
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +80,18 @@ class Fichier
     public function setDossier(?Dossier $dossier): self
     {
         $this->dossier = $dossier;
+
+        return $this;
+    }
+
+    public function getTaille(): ?float
+    {
+        return $this->taille;
+    }
+
+    public function setTaille(?float $taille): self
+    {
+        $this->taille = $taille;
 
         return $this;
     }

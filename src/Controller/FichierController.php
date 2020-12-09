@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Dossier;
 use App\Entity\Fichier;
 use App\Form\FichierType;
 use App\Repository\FichierRepository;
@@ -27,14 +28,37 @@ class FichierController extends AbstractController
 
     /**
      * @Route("/new", name="fichier_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param Dossier $dossier
+     * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request,Dossier $dossier): Response
     {
         $fichier = new Fichier();
         $form = $this->createForm(FichierType::class, $fichier);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $document */
+            $document = $form['libelle']->getData();
+
+            if ($document)
+            {
+               try
+                {
+                    $document->move($this->getParameter('document_directory'));
+                }
+                catch (FileException $e)
+                {
+
+                }
+                $fichier->setDossier($dossier);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($fichier);
+                $entityManager->flush();
+                return $this->redirectToRoute('fichier_index');
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($fichier);
             $entityManager->flush();

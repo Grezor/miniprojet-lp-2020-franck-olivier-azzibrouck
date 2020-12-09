@@ -20,7 +20,7 @@ class Formule
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $libelle;
 
@@ -96,5 +96,10 @@ class Formule
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->libelle;
     }
 }

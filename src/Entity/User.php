@@ -6,10 +6,14 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="Cette adresse mail n'est plus disponible")
  */
 class User implements UserInterface
 {
@@ -21,7 +25,7 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=60, unique=true)
      */
     private $email;
 
@@ -37,19 +41,22 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=20)
+     * @Assert\NotBlank()
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=20)
+     * @Assert\NotBlank()
      */
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(4)
+     * @Assert\NotBlank()
      */
-    private $captcha;
+    protected $captcha;
 
     /**
      * @ORM\OneToMany(targetEntity=Dossier::class, mappedBy="user")
@@ -60,6 +67,11 @@ class User implements UserInterface
      * @ORM\ManyToOne(targetEntity=Formule::class, inversedBy="users")
      */
     private $formule;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
 
     public function __construct()
     {
@@ -99,8 +111,6 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
@@ -221,4 +231,23 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->nom."".prenom;
+    }
+
+
 }
