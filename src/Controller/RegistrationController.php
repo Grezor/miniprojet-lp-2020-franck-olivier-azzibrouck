@@ -32,6 +32,7 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, SecurityAuthenticator $authenticator): Response
     {
         $user = new User();
+        //création
         $dossier= new Dossier();
         //on récupère notre tableau de captcha
         $captcha=$this->captcha();
