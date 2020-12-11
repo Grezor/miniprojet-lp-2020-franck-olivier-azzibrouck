@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DossierController extends AbstractController
 {
     /**
-     * @Route("/", name="dossier_index", methods={"GET"})
+     * @Route("/", name="dossier_index", methods={"GET","POST"})
      */
     public function index(DossierRepository $dossierRepository): Response
     {
@@ -26,20 +26,22 @@ class DossierController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="dossier_new", methods={"GET","POST"})
+     * @Route("/new/", name="dossier_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
+        $user=$this->getUser();
         $dossier = new Dossier();
         $form = $this->createForm(DossierType::class, $dossier);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $dossier->setUser($user);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($dossier);
             $entityManager->flush();
 
-            return $this->redirectToRoute('dossier_index');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('dossier/new.html.twig', [
@@ -49,12 +51,37 @@ class DossierController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="dossier_show", methods={"GET"})
+     * @Route("/{id}", name="dossier_show", methods={"GET","POST"})
+     * @param Request $request
+     * @param Dossier $dossier
+     * @return Response
      */
-    public function show(Dossier $dossier): Response
+    public function show(Request $request,Dossier $dossier): Response
     {
+        $user=$this->getUser();
+        $newdossier = new Dossier();
+        $form = $this->createForm(DossierType::class, $newdossier);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $newdossier->setUser($user);
+            $newdossier->setIdDossier($dossier);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($newdossier);
+            $entityManager->flush();
+
+        }
+
         return $this->render('dossier/show.html.twig', [
             'dossier' => $dossier,
+            'dossiers'=>$dossier->getDossiers(),
+            'form' => $form->createView(),
+
+        ]);
+        return $this->render('dossier/show.html.twig', [
+            'dossier' => $dossier,
+            'dossiers'=>$dossier->getDossiers(),
+            'form' => $form->createView(),
+
         ]);
     }
 
@@ -89,6 +116,6 @@ class DossierController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('dossier_index');
+        return $this->redirectToRoute('home');
     }
 }

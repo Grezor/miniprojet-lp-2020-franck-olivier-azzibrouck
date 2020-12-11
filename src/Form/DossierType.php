@@ -13,8 +13,6 @@ class DossierType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('id_dossier')
-            ->add('user')
         ;
     }
 

@@ -6,6 +6,7 @@ use App\Repository\DossierRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=DossierRepository::class)
@@ -39,15 +40,10 @@ class Dossier
      */
     private $user;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Fichier::class, mappedBy="dossier")
-     */
-    private $fichiers;
 
     public function __construct()
     {
         $this->dossiers = new ArrayCollection();
-        $this->fichiers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -121,33 +117,8 @@ class Dossier
         return $this;
     }
 
-    /**
-     * @return Collection|Fichier[]
-     */
-    public function getFichiers(): Collection
+    public function __toString()
     {
-        return $this->fichiers;
-    }
-
-    public function addFichier(Fichier $fichier): self
-    {
-        if (!$this->fichiers->contains($fichier)) {
-            $this->fichiers[] = $fichier;
-            $fichier->setDossier($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFichier(Fichier $fichier): self
-    {
-        if ($this->fichiers->removeElement($fichier)) {
-            // set the owning side to null (unless already changed)
-            if ($fichier->getDossier() === $this) {
-                $fichier->setDossier(null);
-            }
-        }
-
-        return $this;
+        return $this->libelle;
     }
 }

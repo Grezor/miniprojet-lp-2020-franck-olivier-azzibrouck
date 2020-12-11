@@ -71,7 +71,7 @@ class SecurityAuthenticator extends AbstractFormLoginAuthenticator implements Pa
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException('Erreur lors de la saisie de votre adresse email.');
         }
 
         return $user;
@@ -96,7 +96,7 @@ class SecurityAuthenticator extends AbstractFormLoginAuthenticator implements Pa
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('user_index'));
+        return new RedirectResponse($this->urlGenerator->generate('home'));
 //        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

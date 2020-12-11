@@ -32,13 +32,12 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, SecurityAuthenticator $authenticator): Response
     {
         $user = new User();
-        //création
         $dossier= new Dossier();
         //on récupère notre tableau de captcha
         $captcha=$this->captcha();
         //on retourne à l'utilisateur un captcha aléatoire de notre liste
         $captcha_afficher= $captcha[random_int(0,3)];
-        //notre message d'erreur
+        //notre message d'erreur pour le captcha
         $error= "";
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -55,8 +54,11 @@ class RegistrationController extends AbstractController
                     )
                 );
                 $user->setRoles(["ROLE_ADMIN"]);
+                $dossier->setUser($user);
+                $dossier->setLibelle("Mon stockage");
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($user);
+                $entityManager->persist($dossier);
                 $entityManager->flush();
 
                 // generate a signed url and email it to the user

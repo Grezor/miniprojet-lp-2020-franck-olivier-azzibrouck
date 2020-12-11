@@ -31,7 +31,7 @@
                                 </div>
                             {% endif %}
                             {{ form_start(registrationForm) }}
-                            <form class="user">
+                            <div class="user">
                                 <div class="form-group">
                                    {{ form_row(registrationForm.nom) }}
                                    {{ form_row(registrationForm.prenom) }}
@@ -59,11 +59,11 @@
                                 <div class="form-group">
                                         {{ form_row(registrationForm.agreeTerms) }}
                                 </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
+                                <button type="submit" class="btn btn-primary btn-user btn-block">
                                    Créer votre compte
-                                </a>
+                                </button>
                                 <hr>
-                            </form>
+                            </div>
                             {{ form_end(registrationForm) }}
                             <div class="text-center">
                                 <a class="small" href="{{ path('app_login') }}">Déjà un compte, connectez vous ici!</a>
@@ -76,10 +76,10 @@
 
     </div>
     <!-- Footer -->
-    <footer class="sticky-footer bg-white">
+    <footer class="sticky-footer " style="position: absolute;  bottom: 0;  width: 100%;  margin-top: 50px;">
         <div class="container my-auto">
             <div class="copyright text-center my-auto">
-                <span>Copyright &copy; Your Website 2020</span>
+                <span style="color: white">Copyright &copy; Your Website 2020</span>
             </div>
         </div>
     </footer>

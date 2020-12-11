@@ -1,3 +1,5 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+##dossier delete
+dossier_delete:
+  path: /dossier/{id}
+  controller: App\Controller\DossierController::delete
+

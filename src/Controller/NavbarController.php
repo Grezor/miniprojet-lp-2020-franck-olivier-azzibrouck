@@ -13,13 +13,16 @@ class NavbarController extends AbstractController
      */
     public function sidebar(): Response
     {
+        $user=$this->getUser();
+        $userDossier= $user->getDossiers()[0]->getDossiers();
         return $this->render('navbar/sidebar.html.twig', [
             'controller_name' => 'NavbarController',
+            'dossiers'=>$userDossier
         ]);
     }
 
     /**
-     * @Route("/topbar", name="topbar")
+     * @Route("/topbar", name="topbar", methods={"GET","POST"})
      */
     public function topbar(): Response
     {
@@ -27,4 +30,6 @@ class NavbarController extends AbstractController
             'controller_name' => 'topbarController',
         ]);
     }
+
+
 }

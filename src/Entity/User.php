@@ -244,9 +244,12 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function __toString()
     {
-        return $this->nom."".prenom;
+        return $this->email;
     }
 
 
