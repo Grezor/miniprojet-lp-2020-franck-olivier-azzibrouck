@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Choixformule;
 use App\Entity\Dossier;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\FormuleRepository;
 use App\Security\EmailVerifier;
 use App\Security\SecurityAuthenticator;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -29,9 +31,12 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, SecurityAuthenticator $authenticator): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, FormuleRepository $formuleRepository,
+                             GuardAuthenticatorHandler $guardHandler, SecurityAuthenticator $authenticator): Response
     {
+        //On crée un utilisateur
         $user = new User();
+        //on crée le dossier racine du projet
         $dossier= new Dossier();
         //on récupère notre tableau de captcha
         $captcha=$this->captcha();
@@ -53,11 +58,21 @@ class RegistrationController extends AbstractController
                         $form->get('plainPassword')->getData()
                     )
                 );
+                //on récupere la formule en fanction de l'id
+                $formule= $formuleRepository->findOneBy(['id'=>$form['formule']->getData()]);
+                //On ajoute le choix de la formule
+                $choixformule= new Choixformule($user,$formule);
+                //
+                $choixformule->setTailleDisponible($formule->getTaille());
+                $choixformule->setValide(true);
+                //on attribut le role à l'utilisateur
                 $user->setRoles(["ROLE_ADMIN"]);
+                //on affecte le dossier racine à l'utilisateur
+                $dossier->setLibelle("Disk");
                 $dossier->setUser($user);
-                $dossier->setLibelle("Mon stockage");
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($user);
+                $entityManager->persist($choixformule);
                 $entityManager->persist($dossier);
                 $entityManager->flush();
 

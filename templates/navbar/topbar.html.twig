@@ -9,50 +9,26 @@
         </button>
 {#        ajout des dossiers#}
                 <div class="col-md-1">
-                   <a  href="#" data-toggle="modal" data-target="#dossierModal">
-                       <i class="fa fa-folder-plus" style="font-size:30px;color:royalblue;"></i>
+                   <a  href="#" data-toggle="modal" data-target="#dossierModal" style="color: navajowhite">
+                       <i class="fa fa-folder-plus" style="font-size:30px;color:navajowhite;"></i>
                        nouveau
                    </a>
                 </div>
 
                 <div class="col-md-1">
-                    <a href="#" data-toggle="modal" data-target="#fichierModal">
-                        <i class="fa fa-file-medical" style="font-size:30px;color:royalblue;"></i>
+                    <a href="#" data-toggle="modal" data-target="#fichierModal" style="color: navajowhite">
+                        <i class="fa fa-file-medical" style="font-size:30px;color:navajowhite;"></i>
                         nouveau
                     </a>
                 </div>
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
 
-            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-search fa-fw"></i>
-                </a>
-                <!-- Dropdown - Messages -->
-                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                     aria-labelledby="searchDropdown">
-                    <form class="form-inline mr-auto w-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small"
-                                   placeholder="Search for..." aria-label="Search"
-                                   aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </li>
-
             <!-- Nav Item - Alerts -->
             <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-bell fa-fw"></i>
+                    <i class="fas fa-bell fa-fw" style="font-size:30px;color:navajowhite;"></i>
                     <!-- Counter - Alerts -->
                     <span class="badge badge-danger badge-counter">3+</span>
                 </a>
@@ -103,7 +79,7 @@
             <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-envelope fa-fw"></i>
+                    <i class="fas fa-envelope fa-fw" style="font-size:30px;color:navajowhite;"></i>
                     <!-- Counter - Messages -->
                     <span class="badge badge-danger badge-counter">7</span>
                 </a>
@@ -171,9 +147,7 @@
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                    <img class="img-profile rounded-circle"
-                         src="img/undraw_profile.svg">
+                    <span class="fa fa-user-secret" style="font-size:30px;color:navajowhite;"></span>
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -250,12 +224,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    {{ render(path('fichier_new')) }}
+                </div>
 
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
-                    <a class="btn btn-primary" href="login.html">Enregistrer</a>
-                </div>
             </div>
         </div>
     </div>

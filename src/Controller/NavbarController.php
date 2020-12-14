@@ -14,10 +14,14 @@ class NavbarController extends AbstractController
     public function sidebar(): Response
     {
         $user=$this->getUser();
+        $tailleDisponible= $user->getChoixformules()[0]->getTailleDisponible();
+        $tailleFormule= $user->getChoixformules()[0]->getFormule()->getTaille();
         $userDossier= $user->getDossiers()[0]->getDossiers();
         return $this->render('navbar/sidebar.html.twig', [
             'controller_name' => 'NavbarController',
-            'dossiers'=>$userDossier
+            'dossiers'=>$userDossier,
+            'taille_disponible'=>$tailleDisponible,
+            'taille_formule'=>$tailleFormule
         ]);
     }
 

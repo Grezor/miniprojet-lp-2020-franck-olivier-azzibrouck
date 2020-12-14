@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\DossierRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -40,10 +41,24 @@ class Dossier
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Fichier::class, mappedBy="dossier")
+     */
+    private $fichiers;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
+
+
+
 
     public function __construct()
     {
+        $this->date = new DateTime('now');
         $this->dossiers = new ArrayCollection();
+        $this->fichiers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -121,4 +136,47 @@ class Dossier
     {
         return $this->libelle;
     }
+
+    /**
+     * @return Collection|Fichier[]
+     */
+    public function getFichiers(): Collection
+    {
+        return $this->fichiers;
+    }
+
+    public function addFichier(Fichier $fichier): self
+    {
+        if (!$this->fichiers->contains($fichier)) {
+            $this->fichiers[] = $fichier;
+            $fichier->setDossier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFichier(Fichier $fichier): self
+    {
+        if ($this->fichiers->removeElement($fichier)) {
+            // set the owning side to null (unless already changed)
+            if ($fichier->getDossier() === $this) {
+                $fichier->setDossier(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
 }

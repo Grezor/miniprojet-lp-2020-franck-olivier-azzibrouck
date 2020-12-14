@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -44,7 +45,13 @@ class RegistrationFormType extends AbstractType
                 ),
                 'label' => false,
             ))
-            ->add('formule')
+            ->add('formule', ChoiceType::class, [
+                'choices'  => [
+                    '10Mo' => 1,
+                    '100Mo' => 2,
+                    '1Go' => 3,
+                ]]
+            )
             ->add('agreeTerms', CheckboxType::class, [
                 'label' => 'valider vos informations',
                 'mapped' => false,

@@ -20,6 +20,7 @@ class HomeController extends AbstractController
     {
         $user=$this->getUser();
         $userDossier= $user->getDossiers()[0]->getDossiers();
+        $userfichier= $user->getDossiers()[0]->getFichiers();
         $dossier = new Dossier();
         $form = $this->createForm(DossierType::class, $dossier);
         $form->handleRequest($request);
@@ -36,6 +37,7 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'dossiers'=>$userDossier,
+            'fichiers'=>$userfichier,
         ]);
     }
 

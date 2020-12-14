@@ -4,11 +4,11 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ path('home') }}">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fa fa-hdd"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">{{ app.user.formule.taille }} bytes</div>
+            <div class="sidebar-brand-text mx-3">AzZTECH StockaGE</div>
         </a>
 
         <!-- Divider -->
@@ -17,8 +17,10 @@
 
 
         <!-- Heading -->
-        <div class="sidebar-heading">
-            Espace de stockage
+        <div class="sidebar-heading h3">
+            <p  align="center">
+                {{ taille_disponible }} / {{taille_formule }}  M0
+            </p>
         </div>
         {% for dossier in dossiers%}
         <!-- Nav Item - Pages Collapse Menu -->
@@ -26,7 +28,8 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#{{ dossier }}"
                aria-expanded="true" aria-controls="collapsePages">
                 <i class="fas fa-fw fa-folder"></i>
-                <span>{{ dossier }}</span>
+                <span>
+                    {{ dossier }}</span>
             </a>
             <div id="{{ dossier }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">

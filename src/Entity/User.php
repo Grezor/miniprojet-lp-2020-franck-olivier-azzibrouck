@@ -58,24 +58,29 @@ class User implements UserInterface
      */
     protected $captcha;
 
+    protected $formule;
+
     /**
      * @ORM\OneToMany(targetEntity=Dossier::class, mappedBy="user")
      */
     private $dossiers;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Formule::class, inversedBy="users")
-     */
-    private $formule;
+
 
     /**
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Choixformule::class, mappedBy="user")
+     */
+    private $choixformules;
+
     public function __construct()
     {
         $this->dossiers = new ArrayCollection();
+        $this->choixformules = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -220,17 +225,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getFormule(): ?Formule
-    {
-        return $this->formule;
-    }
-
-    public function setFormule(?Formule $formule): self
-    {
-        $this->formule = $formule;
-
-        return $this;
-    }
 
     public function isVerified(): bool
     {
@@ -250,6 +244,52 @@ class User implements UserInterface
     public function __toString()
     {
         return $this->email;
+    }
+
+    /**
+     * @return Collection|Choixformule[]
+     */
+    public function getChoixformules(): Collection
+    {
+        return $this->choixformules;
+    }
+
+    public function addChoixformule(Choixformule $choixformule): self
+    {
+        if (!$this->choixformules->contains($choixformule)) {
+            $this->choixformules[] = $choixformule;
+            $choixformule->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChoixformule(Choixformule $choixformule): self
+    {
+        if ($this->choixformules->removeElement($choixformule)) {
+            // set the owning side to null (unless already changed)
+            if ($choixformule->getUser() === $this) {
+                $choixformule->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFormule()
+    {
+        return $this->formule;
+    }
+
+    /**
+     * @param mixed $formule
+     */
+    public function setFormule($formule): void
+    {
+        $this->formule = $formule;
     }
 
 

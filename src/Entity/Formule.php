@@ -34,9 +34,17 @@ class Formule
      */
     private $users;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity=Choixformule::class, mappedBy="formule")
+     */
+    private $choixformules;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->choixformules = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -101,5 +109,37 @@ class Formule
     public function __toString()
     {
         return $this->libelle;
+    }
+
+
+
+    /**
+     * @return Collection|Choixformule[]
+     */
+    public function getChoixformules(): Collection
+    {
+        return $this->choixformules;
+    }
+
+    public function addChoixformule(Choixformule $choixformule): self
+    {
+        if (!$this->choixformules->contains($choixformule)) {
+            $this->choixformules[] = $choixformule;
+            $choixformule->setFormule($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChoixformule(Choixformule $choixformule): self
+    {
+        if ($this->choixformules->removeElement($choixformule)) {
+            // set the owning side to null (unless already changed)
+            if ($choixformule->getFormule() === $this) {
+                $choixformule->setFormule(null);
+            }
+        }
+
+        return $this;
     }
 }
