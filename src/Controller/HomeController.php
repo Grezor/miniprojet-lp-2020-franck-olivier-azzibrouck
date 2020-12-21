@@ -37,6 +37,7 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'dossiers'=>$userDossier,
+            'racine'=>$userDossier= $user->getDossiers()[0],
             'fichiers'=>$userfichier,
         ]);
     }

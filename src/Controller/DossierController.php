@@ -108,13 +108,15 @@ class DossierController extends AbstractController
     /**
      * @Route("/{id}", name="dossier_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Dossier $dossier): Response
+    public function delete(Request $request, Dossier $dossier)
     {
+        $dossier_parent= $dossier->getIdDossier()->getId();
         if ($this->isCsrfTokenValid('delete'.$dossier->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($dossier);
             $entityManager->flush();
         }
+        return $this->redirectToRoute('dossier_show',['id'=>$dossier_parent]);
 
     }
 }
