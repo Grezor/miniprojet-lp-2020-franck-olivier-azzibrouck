@@ -1,5 +1,10 @@
-##dossier delete
-dossier_delete:
-  path: /dossier/{id}
-  controller: App\Controller\DossierController::delete
-
+###dossier delete
+#dossier_delete:
+#  path: /dossier/{id}
+#  controller: App\Controller\DossierController::delete
+#
+###dossier show
+#dossier_show:
+#  path: /dossier/{id}
+#  controller: App\Controller\DossierController::show
+#

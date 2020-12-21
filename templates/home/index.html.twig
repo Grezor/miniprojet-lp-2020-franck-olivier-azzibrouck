@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Home!{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -22,40 +22,47 @@
                 <td>
                     <a href="{{ path('dossier_show', {'id': dossier.id}) }}">
 
-                            <span class="fas fa-fw fa-folder" style="font-size:40px;color:royalblue;"></span>
+                            <span class="fas fa-fw fa-folder" style="font-size:40px;color:#f4b619;"></span>
                            {{ dossier }}
                     </a>
                 </td>
-                <td>{{ dossier.libelle }}</td>
-{#                <td>{{ dossier.date ? fichier.date|date('Y-m-d') : '' }}</td>#}
-                <td>
-                    <a href="{{ path('dossier_show', {'id': dossier.id}) }}">show</a>
-                    <a href="{{ path('dossier_show', {'id': dossier.id}) }}">edit</a>
+                <td>{{ dossier.date ? dossier.date|date('d/m/y à h:i:s') : '' }}</td>
+                <td></td>
+                <td align="left">
+                    <form  method="post" action="{{ path('dossier_delete', {'id': dossier.id}) }}" onsubmit="return confirm('Suppression du dossier?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ dossier.id) }}">
+                        <button class="btn" style="font-size:20px;color:red;margin-top:-3.8px;margin-left: 40px">
+                            <span class="fas fa-fw fa-trash-alt"></span>
+                        </button>
+                    </form>
                 </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">Votre repertoire es vide</td>
             </tr>
         {% endfor %}
         {% for fichier in fichiers %}
             <tr>
                 <td>
                     <a href="{{ path('fichier_show', {'id': fichier.id}) }}">
-
-                            <span class="fas fa-fw fa-file" style="font-size:40px;color:royalblue;"></span>
-                           {{ fichier.id }}
+                            <span class="fas fa-fw fa-file" style="font-size:40px;color:wheat;"></span>
+                           {{ fichier.libelle }}
                     </a>
                 </td>
-                <td>{{ fichier.libelle }}</td>
-{#                <td>{{ dossier.date ? fichier.date|date('Y-m-d') : '' }}</td>#}
-                <td>
-                    <a href="{{ path('fichier_show', {'id': fichier.id}) }}">show</a>
+                <td>{{ fichier.date ? fichier.date|date('d/m/y à h:i:s') : '' }}</td>
+                <td>{{ fichier.taille}}Mo</td>
+                <td class="row">
+                    <a  href="{{ path('fichier_show', {'id': fichier.id}) }}">
+                        <button class="btn">
+                            <span class="fas fa-fw fa-download" style="font-size:20px;color:cadetblue;"></span>
+                        </button>
+                    </a>
+                    <form  method="post" action="{{ path('fichier_delete', {'id': fichier.id}) }}" onsubmit="return confirm('suppression du fichier?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ fichier.id) }}">
+                        <button class="btn" style="font-size:20px;color:red;margin-top:-4px">
+                            <span class="fas fa-fw fa-trash-alt"></span>
+                        </button>
+                    </form>
                 </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">Votre repertoire es vide</td>
             </tr>
         {% endfor %}
         </tbody>

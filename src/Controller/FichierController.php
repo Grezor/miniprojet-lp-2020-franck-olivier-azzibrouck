@@ -31,6 +31,7 @@ class FichierController extends AbstractController
     public function new(Request $request): Response
     {
         $user= $this->getUser();
+        $dossier= $user->getDossiers();
         $choixformule= $user->getChoixformules()[0];
         $fichier = new Fichier();
         $form = $this->createForm(FichierType::class, $fichier);
@@ -121,8 +122,10 @@ class FichierController extends AbstractController
 
     /**
      * @Route("/{id}", name="fichier_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Fichier $fichier
      */
-    public function delete(Request $request, Fichier $fichier): Response
+    public function delete(Request $request, Fichier $fichier)
     {
         if ($this->isCsrfTokenValid('delete'.$fichier->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -130,7 +133,6 @@ class FichierController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('fichier_index');
     }
 
 

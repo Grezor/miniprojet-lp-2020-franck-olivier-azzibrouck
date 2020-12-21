@@ -116,6 +116,5 @@ class DossierController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('home');
     }
 }
