@@ -3,5 +3,135 @@
 {% block title %}Dossier{% endblock %}
 
 {% block body %}
-<h1>{{ dossier }}({{ dossier.fichiers|length }})</h1>
+    <div class="container">
+        <div class=" dropdown show">
+            <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                <span class="fas fa-fw fa-folder-open" style="font-size:40px;color:#f4b619;"></span>
+                {{ dossier }}({{ dossier.fichiers|length }})
+            </a>
+            <div class="dropdown-menu show">
+                <a class="dropdown-item-text" href="#" data-toggle="modal" data-target="#dossierModal" style="color:#f4b619;">
+                    <i class="fa fa-folder-plus" style="font-size:30px;"> </i>
+                    nouveau dossier
+                </a>
+                <a class="dropdown-item-text" href="#" data-toggle="modal" data-target="#fichierModal" style="color: navajowhite">
+                    <i class="fa fa-file-import" style="font-size:30px;"> </i>
+                    nouveau fichier
+                </a>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+            <tr>
+                <th>Libelle</th>
+                <th>Date</th>
+                <th>Taille</th>
+                <th>actions</th>
+            </tr>
+            </tr>
+            </thead>
+            <tbody>
+            {% for dossier in dossiers %}
+                <tr>
+                    <td>
+                        <a href="{{ path('dossier_show', {'id': dossier.id}) }}">
+
+                            <span class="fas fa-fw fa-folder" style="font-size:40px;color:#f4b619;"></span>
+                            {{ dossier }}({{ dossier.fichiers|length }})
+                        </a>
+                    </td>
+                    <td>{{ dossier.date ? dossier.date|date('d/m/y à h:i:s') : '' }}</td>
+                    <td></td>
+                    <td align="left">
+                        <form  method="post" action="{{ path('dossier_delete', {'id': dossier.id}) }}" onsubmit="return confirm('Suppression du dossier?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ dossier.id) }}">
+                            <button class="btn" style="font-size:20px;color:red;margin-top:-3.8px;margin-left: 40px">
+                                <span class="fas fa-fw fa-trash-alt"></span>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            {% for fichier in fichiers %}
+                <tr>
+                    <td>
+                        <a href="{{ path('fichier_show', {'id': fichier.id}) }}">
+                            <span class="fas fa-fw fa-file" style="font-size:40px;color:wheat;"></span>
+                            {{ fichier.libelle }}
+                        </a>
+                    </td>
+                    <td>{{ fichier.date ? fichier.date|date('d/m/y à h:i:s') : '' }}</td>
+                    <td>{{ fichier.taille}}Mo</td>
+                    <td class="row">
+                        <a  href="{{ path('fichier_show', {'id': fichier.id}) }}">
+                            <button class="btn">
+                                <span class="fas fa-fw fa-download" style="font-size:20px;color:cadetblue;"></span>
+                            </button>
+                        </a>
+                        <form  method="post" action="{{ path('fichier_delete', {'id': fichier.id}) }}" onsubmit="return confirm('suppression du fichier?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ fichier.id) }}">
+                            <button class="btn" style="font-size:20px;color:red;margin-top:-4px">
+                                <span class="fas fa-fw fa-trash-alt"></span>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {#    les modales #}
+    <!-- Ajout dossier-->
+    <div class="modal fade" id="dossierModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un dossier</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form1) }}
+                    {{ form_widget(form1) }}
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                        <button class="btn btn-primary">Enregistrer</button>
+                    </div>
+                    {{ form_end(form1) }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ajout fichier-->
+    <div class="modal fade" id="fichierModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un fichier</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form2) }}
+                    {{ form_widget(form2) }}
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                        <button class="btn btn-primary">Enregistrer</button>
+                    </div>
+                    {{ form_end(form2) }}
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {#    Fin des modales #}
 {% endblock %}

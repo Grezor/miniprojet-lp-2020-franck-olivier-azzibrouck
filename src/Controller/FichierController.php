@@ -127,11 +127,20 @@ class FichierController extends AbstractController
      */
     public function delete(Request $request, Fichier $fichier)
     {
+        $user=$this->getUser();
+        $dossier_parent= $fichier->getDossier()->getId();
+        $taillefichier= $fichier->getTaille();
+        $choixformule= $user->getChoixformules()[0];
+
         if ($this->isCsrfTokenValid('delete'.$fichier->getId(), $request->request->get('_token'))) {
+            $choixformule->setTailleDisponible($choixformule->getTailleDisponible()+$taillefichier);
             $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($choixformule);
             $entityManager->remove($fichier);
             $entityManager->flush();
         }
+        return $this->redirectToRoute('dossier_show',['id'=>$dossier_parent]);
+
 
     }
 

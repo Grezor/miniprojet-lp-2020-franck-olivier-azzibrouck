@@ -25,7 +25,8 @@ class HomeController extends AbstractController
         $form = $this->createForm(DossierType::class, $dossier);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid())
+        {
             $dossier->setUser($user);
             $dossier->setIdDossier($user->getDossiers()[0]);
             $entityManager = $this->getDoctrine()->getManager();

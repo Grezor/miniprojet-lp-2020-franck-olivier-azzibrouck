@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Dossier;
+use App\Entity\Fichier;
 use App\Form\DossierType;
+use App\Form\FichierType;
 use App\Repository\DossierRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,27 +62,96 @@ class DossierController extends AbstractController
     {
         $user=$this->getUser();
         $newdossier = new Dossier();
-        $form = $this->createForm(DossierType::class, $newdossier);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        $fichiers= $dossier->getFichiers();
+        $choixformule= $user->getChoixformules()[0];
+        $fichier = new Fichier();
+
+        //formulaire des dossiers
+        $form1 = $this->createForm(DossierType::class, $newdossier);
+        $form1->handleRequest($request);
+        //formulaire des fichiers
+        $form2 = $this->createForm(FichierType::class, $fichier);
+        $form2->handleRequest($request);
+
+        if ($form1->isSubmitted() && $form1->isValid()) {
             $newdossier->setUser($user);
             $newdossier->setIdDossier($dossier);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newdossier);
             $entityManager->flush();
 
+            return $this->render('dossier/show.html.twig', [
+                'dossier' => $dossier,
+                'fichiers'=>$fichiers,
+                'dossiers'=>$dossier->getDossiers(),
+                'form1' => $form1->createView(),
+                'form2' => $form2->createView(),
+
+            ]);
+
+        }
+
+        if ($form2->isSubmitted() && $form2->isValid()) {
+            /** @var UploadedFile $document */
+            $document = $form2['libelle']->getData();
+
+            if ($document)
+            {
+                //on récupère la taille du fichier et on la convertie en Mo
+                $filetaille=$this->convertisseur(filesize($document));
+                //On récupère la taille de disponible dans notre memoire
+                $taille_disponible= $choixformule->getTailleDisponible();
+                $nouvelle_taille_disponible =  $taille_disponible - $filetaille ;
+
+                //on récupere le nom du document uploader
+                $originalFilename = pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME);
+                //$safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $originalFilename.'.'.$document->guessExtension();
+
+                try
+                {
+                    //on stock le document dans le repertoire approprié
+                    $document->move($this->getParameter('document_directory'),$newFilename );
+                }
+                catch (FileException $e)
+                {
+
+                }
+
+                $fichier->setLibelle($newFilename);
+                $fichier->setTaille($filetaille);
+                $fichier->setDossier($dossier);
+                $choixformule->setTailleDisponible($nouvelle_taille_disponible);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($fichier,$choixformule);
+                $entityManager->flush();
+
+                return $this->render('dossier/show.html.twig', [
+                    'dossier' => $dossier,
+                    'fichiers'=>$fichiers,
+                    'dossiers'=>$dossier->getDossiers(),
+                    'form1' => $form1->createView(),
+                    'form2' => $form2->createView(),
+
+                ]);
+            }
+            return $this->render('dossier/show.html.twig', [
+                'dossier' => $dossier,
+                'fichiers'=>$fichiers,
+                'dossiers'=>$dossier->getDossiers(),
+                'form1' => $form1->createView(),
+                'form2' => $form2->createView(),
+
+            ]);
+
         }
 
         return $this->render('dossier/show.html.twig', [
             'dossier' => $dossier,
+            'fichiers'=>$fichiers,
             'dossiers'=>$dossier->getDossiers(),
-            'form' => $form->createView(),
-
-        ]);
-        return $this->render('dossier/show.html.twig', [
-            'dossier' => $dossier,
-            'dossiers'=>$dossier->getDossiers(),
-            'form' => $form->createView(),
+            'form1' => $form1->createView(),
+            'form2' => $form2->createView(),
 
         ]);
     }
@@ -117,6 +188,14 @@ class DossierController extends AbstractController
             $entityManager->flush();
         }
         return $this->redirectToRoute('dossier_show',['id'=>$dossier_parent]);
+
+    }
+    function convertisseur($octet)
+    {
+//        // Array contenant les differents unités
+//        $unite = array('octet','ko','Mo','go');
+        $mo = round($octet/(1024*1024),2);
+        return $mo;
 
     }
 }
