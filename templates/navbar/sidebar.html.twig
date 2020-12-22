@@ -17,10 +17,30 @@
 
 
         <!-- Heading -->
+        {% set values =   taille_disponible*100/taille_formule %}
         <div class="sidebar-heading h3">
-            <p  align="center">
-                {{ taille_disponible }} / {{taille_formule }}  M0
+            <p  >
+            <h4 class="small font-weight-bold">
+                <span class="float-right">
+                    {{ values }}%
+                </span>
+            </h4><br>
+{#                {{ taille_disponible }} / {{taille_formule }}  M0#}
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated
+                    {% set values =   taille_disponible*100/taille_formule %}
+                    {% if  values>26 and values<70  %}
+                    bg-warning
+                    {% elseif values <25 %}
+                    bg-danger
+                    {% else %}
+                     bg-success
+                    {% endif %}
+                   " role="progressbar" style="width: {{ taille_disponible*100/taille_formule }}%"
+                     aria-valuenow={{ taille_disponible }} aria-valuemin="0" aria-valuemax="{{taille_formule }}" title="il vous reste {{ taille_disponible }}Mo"></div>
+            </div>
             </p>
+            <p align="center"> Disponible</p>
         </div>
         {% for dossier in dossiers%}
         <!-- Nav Item - Pages Collapse Menu -->

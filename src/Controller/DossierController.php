@@ -189,15 +189,19 @@ class DossierController extends AbstractController
         $dossier_parent= $dossier->getIdDossier()->getId();
         //on supprime tout les fichiers dans le dossier
         //on parcourt tous nos fichiers
-        for ($i=0;$i<= count($dossier->getFichiers());$i++)
+        if ($dossier->getFichiers()[0]!=null)
         {
+            for ($i=0;$i<= count($dossier->getFichiers());$i++)
+            {
 
-            $choixformule->setTailleDisponible($dossier->getFichiers()[$i]->getTaille()+ $choixformule->getTailleDisponible());
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($choixformule);
-            $entityManager->remove($dossier->getFichiers()[$i]);
-            $entityManager->flush();
+                $choixformule->setTailleDisponible($dossier->getFichiers()[$i]->getTaille()+ $choixformule->getTailleDisponible());
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($choixformule);
+                $entityManager->remove($dossier->getFichiers()[$i]);
+                $entityManager->flush();
+            }
         }
+
         if ($this->isCsrfTokenValid('delete'.$dossier->getId(), $request->request->get('_token')))
         {
             $entityManager = $this->getDoctrine()->getManager();

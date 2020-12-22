@@ -8,20 +8,19 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
                 <th>Nom</th>
                 <th>Prenom</th>
+                <th>Espace disponible</th>
+                <th>formule</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.choixformule.tailledisponible}}</td>
                 <td>{{ user.nom }}</td>
                 <td>{{ user.prenom }}</td>
                 <td>
@@ -36,6 +35,24 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('user_new') }}">Create new</a>
+{#    <div class="progress">#}
+{#        {% set values =   taille_disponible*100/taille_formule %}#}
+{#        <h4 class="small font-weight-bold">#}
+{#                <span class="float-right">#}
+{#                    {{ values }}%#}
+{#                </span>#}
+{#        </h4><br>#}
+{#        <div class="progress-bar progress-bar-striped progress-bar-animated#}
+{#                    {% set values =   taille_disponible*100/taille_formule %}#}
+{#                    {% if  values>26 and values<70  %}#}
+{#                    bg-warning#}
+{#                    {% elseif values <25 %}#}
+{#                    bg-danger#}
+{#                    {% else %}#}
+{#                     bg-success#}
+{#                    {% endif %}#}
+{#                   " role="progressbar" style="width: {{ taille_disponible*100/taille_formule }}%"#}
+{#             aria-valuenow={{ taille_disponible }} aria-valuemin="0" aria-valuemax="{{taille_formule }}" title="il vous reste {{ taille_disponible }}Mo"></div>#}
+{#    </div>#}
+{#    <a href="{{ path('user_new') }}">Create new</a>#}
 {% endblock %}

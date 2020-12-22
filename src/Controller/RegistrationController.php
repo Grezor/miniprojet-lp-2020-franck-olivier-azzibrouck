@@ -66,7 +66,7 @@ class RegistrationController extends AbstractController
                 $choixformule->setTailleDisponible($formule->getTaille());
                 $choixformule->setValide(true);
                 //on attribut le role à l'utilisateur
-                $user->setRoles(["ROLE_ADMIN"]);
+                $user->setRoles(["ROLE_USER"]);
                 //on affecte le dossier racine à l'utilisateur
                 $dossier->setLibelle("Disk");
                 $dossier->setUser($user);

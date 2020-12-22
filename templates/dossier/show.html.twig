@@ -4,7 +4,13 @@
 
 {% block body %}
     <div class="container">
-        <div class=" dropdown show">
+        <div class="row">
+            {%  if dossier.idDossier != null %}
+            <a class="nav-link" href="{{ path('dossier_show',{'id': dossier.idDossier.id}) }}">
+                <span class="fas fa-fw fa-folder-open" style="font-size:40px;color:#f4b619;"></span>
+                {{ dossier.idDossier }}({{ dossier.idDossier.fichiers|length }})
+            </a><span class="h1" style="margin-top: 5px"><strong>\</strong></span>
+            {% endif %}
             <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
                 <span class="fas fa-fw fa-folder-open" style="font-size:40px;color:#f4b619;"></span>
                 {{ dossier }}({{ dossier.fichiers|length }})

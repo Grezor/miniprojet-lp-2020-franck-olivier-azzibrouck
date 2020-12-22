@@ -4,8 +4,8 @@
 
 {% block body %}
 <div class="container">
-    <div class=" dropdown show">
-         <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+    <div class=" dropdown show row">
+        <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
              <span class="fas fa-fw fa-folder-open " style="font-size:40px;color:#f4b619;"></span>
                 {{ racine }}({{ racine.fichiers|length }})
          </a>
@@ -122,7 +122,5 @@
         </div>
     </div>
 {#    Fin des modales #}
-    <script>
-        $('.dropdown-toggle').dropdown();
-    </script>
+
 {% endblock %}
