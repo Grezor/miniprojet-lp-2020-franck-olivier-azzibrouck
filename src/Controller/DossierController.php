@@ -181,8 +181,25 @@ class DossierController extends AbstractController
      */
     public function delete(Request $request, Dossier $dossier)
     {
+        //on récupère l'utilisateur connecté
+        $user= $this->getUser();
+        //on récupère la formule de l'utilisateur
+        $choixformule= $user->getChoixformules()[0];
+        //on récupère l'id du repertoire parent
         $dossier_parent= $dossier->getIdDossier()->getId();
-        if ($this->isCsrfTokenValid('delete'.$dossier->getId(), $request->request->get('_token'))) {
+        //on supprime tout les fichiers dans le dossier
+        //on parcourt tous nos fichiers
+        for ($i=0;$i<= count($dossier->getFichiers());$i++)
+        {
+
+            $choixformule->setTailleDisponible($dossier->getFichiers()[$i]->getTaille()+ $choixformule->getTailleDisponible());
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($choixformule);
+            $entityManager->remove($dossier->getFichiers()[$i]);
+            $entityManager->flush();
+        }
+        if ($this->isCsrfTokenValid('delete'.$dossier->getId(), $request->request->get('_token')))
+        {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($dossier);
             $entityManager->flush();
@@ -190,6 +207,8 @@ class DossierController extends AbstractController
         return $this->redirectToRoute('dossier_show',['id'=>$dossier_parent]);
 
     }
+
+
     function convertisseur($octet)
     {
 //        // Array contenant les differents unités
