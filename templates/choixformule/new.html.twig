@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Choixformule{% endblock %}
+
+{% block body %}
+    <h1>Create new Choixformule</h1>
+
+    {{ include('choixformule/_form.html.twig') }}
+
+    <a href="{{ path('choixformule_index') }}">back to list</a>
+{% endblock %}

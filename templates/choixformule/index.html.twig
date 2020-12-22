@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choixformule index{% endblock %}
+
+{% block body %}
+    <h1>Choixformule index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Taille_disponible</th>
+                <th>Valide</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for choixformule in choixformules %}
+            <tr>
+                <td>{{ choixformule.id }}</td>
+                <td>{{ choixformule.tailleDisponible }}</td>
+                <td>{{ choixformule.valide ? 'Yes' : 'No' }}</td>
+                <td>{{ choixformule.date ? choixformule.date|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('choixformule_show', {'id': choixformule.id}) }}">show</a>
+                    <a href="{{ path('choixformule_edit', {'id': choixformule.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('choixformule_new') }}">Create new</a>
+{% endblock %}

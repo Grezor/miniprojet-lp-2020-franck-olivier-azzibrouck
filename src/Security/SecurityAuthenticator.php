@@ -95,7 +95,17 @@ class SecurityAuthenticator extends AbstractFormLoginAuthenticator implements Pa
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
+        //On récupère le role du user via le token
+        $roles= $token->getUser()->getRoles();
+        switch ($roles) {
+            case $roles[0]== "ROLE_ADMIN":
+                return new RedirectResponse($this->urlGenerator->generate('user'));
+                break;
+            case $roles[0]== "ROLE_user":
+                return new RedirectResponse($this->urlGenerator->generate('home'));
+                break;
 
+        }
         return new RedirectResponse($this->urlGenerator->generate('home'));
 //        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }

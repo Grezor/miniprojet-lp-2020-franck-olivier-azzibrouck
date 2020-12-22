@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choixformule{% endblock %}
+
+{% block body %}
+    <h1>Choixformule</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ choixformule.id }}</td>
+            </tr>
+            <tr>
+                <th>Taille_disponible</th>
+                <td>{{ choixformule.tailleDisponible }}</td>
+            </tr>
+            <tr>
+                <th>Valide</th>
+                <td>{{ choixformule.valide ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ choixformule.date ? choixformule.date|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('choixformule_index') }}">back to list</a>
+
+    <a href="{{ path('choixformule_edit', {'id': choixformule.id}) }}">edit</a>
+
+    {{ include('choixformule/_delete_form.html.twig') }}
+{% endblock %}

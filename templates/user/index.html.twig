@@ -3,7 +3,7 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
+    <h3 class="mb-sm-5" align="center" >Gestion des utilisateurs</h3>
 
     <table class="table">
         <thead>
@@ -17,42 +17,52 @@
         </thead>
         <tbody>
         {% for user in users %}
+            {% if user != app.user %}
             <tr>
                 <td>{{ user.nom }}</td>
                 <td>{{ user.prenom }}</td>
-                <td>{{ user.choixformule.tailledisponible}}</td>
-                <td>{{ user.nom }}</td>
-                <td>{{ user.prenom }}</td>
+                {% for formule in user.choixformules  %}
                 <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
+                    {% set values =   formule.tailledisponible*100/formule.formule.taille %}
+{#                    la barre de progreesion#}
+                    <div class="progress mt-1" >
+                        <div class="progress-bar progress-bar-striped progress-bar-animated
+                    {% if  values>26 and values<70  %}
+                    bg-warning
+                    {% elseif values <25 %}
+                    bg-danger
+                    {% else %}
+                     bg-success
+                    {% endif %}
+                           " role="progressbar" style="width: {{ values }}%"
+                                     aria-valuenow={{ formule.tailledisponible }} aria-valuemin="0" aria-valuemax="{{formule.formule.taille }}">
+                            {{ values}}%</div>
+                       </div>
+
+                        </td>
+                        <td>{{ formule.formule }}</td>
+                        <td class="row">
+                        <a  href="{{ path('choixformule_edit', {'id': formule.id}) }}">
+                            <button class="btn" style="margin-top:-8px">
+                                <span class="fas fa-fw fa-users-cog" style="font-size:20px;color:cadetblue;margin-top:-20px" title="modifier la formule"></span>
+                            </button>
+                        </a>
+                        <form  method="post" action="{{ path('user_delete', {'id': user.id}) }}" onsubmit="return confirm('supprimer ce compte?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                            <button class="btn" style="font-size:20px;color:red;margin-top:-14px">
+                                <span class="fas fa-fw fa-user-times" title="suppression de compte"></span>
+                            </button>
+                        </form>
+                        </td>
+                    </tr>
+
+                {% endfor %}
         {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
+                 {% endif %}
         {% endfor %}
         </tbody>
     </table>
-{#    <div class="progress">#}
-{#        {% set values =   taille_disponible*100/taille_formule %}#}
-{#        <h4 class="small font-weight-bold">#}
-{#                <span class="float-right">#}
-{#                    {{ values }}%#}
-{#                </span>#}
-{#        </h4><br>#}
-{#        <div class="progress-bar progress-bar-striped progress-bar-animated#}
-{#                    {% set values =   taille_disponible*100/taille_formule %}#}
-{#                    {% if  values>26 and values<70  %}#}
-{#                    bg-warning#}
-{#                    {% elseif values <25 %}#}
-{#                    bg-danger#}
-{#                    {% else %}#}
-{#                     bg-success#}
-{#                    {% endif %}#}
-{#                   " role="progressbar" style="width: {{ taille_disponible*100/taille_formule }}%"#}
-{#             aria-valuenow={{ taille_disponible }} aria-valuemin="0" aria-valuemax="{{taille_formule }}" title="il vous reste {{ taille_disponible }}Mo"></div>#}
-{#    </div>#}
+
 {#    <a href="{{ path('user_new') }}">Create new</a>#}
 {% endblock %}
