@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="container">
-        <div class="row">
+        <div class="dropdown show row">
             {%  if dossier.idDossier != null %}
             <a class="nav-link" href="{{ path('dossier_show',{'id': dossier.idDossier.id}) }}">
                 <span class="fas fa-fw fa-folder-open" style="font-size:40px;color:#f4b619;"></span>
@@ -25,6 +25,7 @@
                     nouveau fichier
                 </a>
             </div>
+
         </div>
         <table class="table">
             <thead>

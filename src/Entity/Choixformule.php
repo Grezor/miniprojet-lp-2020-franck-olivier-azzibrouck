@@ -74,7 +74,7 @@ class Choixformule
         return $this->formule;
     }
 
-    public function setFormule(?Formule $formule): self
+    public function setFormule(?Formule $formule)
     {
         $this->formule = $formule;
 

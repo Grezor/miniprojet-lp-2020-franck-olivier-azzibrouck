@@ -27,26 +27,71 @@
 {#                    la barre de progreesion#}
                     <div class="progress mt-1" >
                         <div class="progress-bar progress-bar-striped progress-bar-animated
-                    {% if  values>26 and values<70  %}
-                    bg-warning
-                    {% elseif values <25 %}
-                    bg-danger
-                    {% else %}
-                     bg-success
-                    {% endif %}
-                           " role="progressbar" style="width: {{ values }}%"
-                                     aria-valuenow={{ formule.tailledisponible }} aria-valuemin="0" aria-valuemax="{{formule.formule.taille }}">
-                            {{ values}}%</div>
-                       </div>
-
+                            {% if  values>26 and values<70  %}
+                            bg-warning
+                            {% elseif values <25 %}
+                            bg-danger
+                            {% else %}
+                             bg-info
+                            {% endif %}
+                            " role="progressbar" style="width: {{ values }}%"
+                            aria-valuenow={{ formule.tailledisponible }} aria-valuemin="0"
+                            aria-valuemax="{{formule.formule.taille }}" title="memoire disponible {{ formule.tailledisponible }}Mo">
+                            {{ values}}%
+                        </div>
+                    </div>
+                    {% for flash_message in app.session.flashBag.get('info') %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ flash_message }}
+                        </div>
+                    {% endfor %}
                         </td>
                         <td>{{ formule.formule }}</td>
                         <td class="row">
-                        <a  href="{{ path('choixformule_edit', {'id': formule.id}) }}">
+                        <a  data-toggle="modal" data-target="#myModal">
                             <button class="btn" style="margin-top:-8px">
                                 <span class="fas fa-fw fa-users-cog" style="font-size:20px;color:cadetblue;margin-top:-20px" title="modifier la formule"></span>
                             </button>
                         </a>
+                            <!-- Modal -->
+                            <div class="modal" id="myModal">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="post" action="{{ path('modifier_formule', {'id': formule.id}) }}">
+                                                <fieldset>
+                                                    <legend align="center">Modifier la formule</legend>
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-6 col-form-label">Formule actuelle:</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="{{ formule.formule }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+
+                                                        <select class="form-control" id="exampleSelect1" name="formule">
+                                                            <option>1Mo</option>
+                                                            <option>10Mo</option>
+                                                            <option>100Mo</option>
+                                                        </select>
+                                                    </div>
+                                                </fieldset>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">Modifier</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">annuler</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            {#                            fin modal#}
                         <form  method="post" action="{{ path('user_delete', {'id': user.id}) }}" onsubmit="return confirm('supprimer ce compte?');">
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">

@@ -11,66 +11,75 @@
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
 
-            <!-- Nav Item - Alerts -->
-            <li class="nav-item dropdown no-arrow mx-1">
-                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-bell fa-fw" style="font-size:30px;color:navajowhite;"></i>
-                    <!-- Counter - Alerts -->
-                    <span class="badge badge-danger badge-counter">3+</span>
+{#            <!-- Nav Item - Alerts -->#}
+{#            <li class="nav-item dropdown no-arrow mx-1">#}
+{#                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"#}
+{#                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                    <i class="fas fa-bell fa-fw" style="font-size:30px;color:navajowhite;"></i>#}
+{#                    <!-- Counter - Alerts -->#}
+{#                    <span class="badge badge-danger badge-counter">3+</span>#}
+{#                </a>#}
+{#                <!-- Dropdown - Alerts -->#}
+{#                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"#}
+{#                     aria-labelledby="alertsDropdown">#}
+{#                    <h6 class="dropdown-header">#}
+{#                        Alerts Center#}
+{#                    </h6>#}
+{#                    <a class="dropdown-item d-flex align-items-center" href="#">#}
+{#                        <div class="mr-3">#}
+{#                            <div class="icon-circle bg-primary">#}
+{#                                <i class="fas fa-file-alt text-white"></i>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div>#}
+{#                            <div class="small text-gray-500">December 12, 2019</div>#}
+{#                            <span class="font-weight-bold">A new monthly report is ready to download!</span>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                    <a class="dropdown-item d-flex align-items-center" href="#">#}
+{#                        <div class="mr-3">#}
+{#                            <div class="icon-circle bg-success">#}
+{#                                <i class="fas fa-donate text-white"></i>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div>#}
+{#                            <div class="small text-gray-500">December 7, 2019</div>#}
+{#                            $290.29 has been deposited into your account!#}
+{#                        </div>#}
+{#                    </a>#}
+{#                    <a class="dropdown-item d-flex align-items-center" href="#">#}
+{#                        <div class="mr-3">#}
+{#                            <div class="icon-circle bg-warning">#}
+{#                                <i class="fas fa-exclamation-triangle text-white"></i>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div>#}
+{#                            <div class="small text-gray-500">December 2, 2019</div>#}
+{#                            Spending Alert: We've noticed unusually high spending for your account.#}
+{#                        </div>#}
+{#                    </a>#}
+{#                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>#}
+{#                </div>#}
+{#            </li>            <!-- Nav Item - Alerts -->#}
+
+
+            <!-- Nav Item - Formules -->
+            <li class="nav-item mx-1" >
+                <a class="nav-link overflow-auto" href="{{ path('user_index') }}" title="Modifier la formule">
+                    <i class="fas fa-clipboard-list fa-fw" style="font-size:30px;color:navajowhite;"></i>
                 </a>
-                <!-- Dropdown - Alerts -->
-                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                     aria-labelledby="alertsDropdown">
-                    <h6 class="dropdown-header">
-                        Alerts Center
-                    </h6>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                        <div class="mr-3">
-                            <div class="icon-circle bg-primary">
-                                <i class="fas fa-file-alt text-white"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="small text-gray-500">December 12, 2019</div>
-                            <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                        </div>
-                    </a>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                        <div class="mr-3">
-                            <div class="icon-circle bg-success">
-                                <i class="fas fa-donate text-white"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="small text-gray-500">December 7, 2019</div>
-                            $290.29 has been deposited into your account!
-                        </div>
-                    </a>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                        <div class="mr-3">
-                            <div class="icon-circle bg-warning">
-                                <i class="fas fa-exclamation-triangle text-white"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="small text-gray-500">December 2, 2019</div>
-                            Spending Alert: We've noticed unusually high spending for your account.
-                        </div>
-                    </a>
-                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                </div>
-            </li>            <!-- Nav Item - Alerts -->
+            </li>
 
-
-            <!-- Nav Item - Messages -->
+            {% if is_granted( 'ROLE_ADMIN') %}
+            <!-- Nav Item - list users -->
             <li class="nav-item no-arrow mx-1" >
                 <a class="nav-link overflow-auto" href="{{ path('user_index') }}" title="liste des utlisateurs">
                     <i class="fas fa-user-friends fa-fw" style="font-size:30px;color:navajowhite;"></i>
-                    <!-- Counter - Messages -->
-                    <span class="badge badge-danger badge-counter">{{ users|length }}</span>
+                    <!-- Counter - users -->
+                    <span class="badge badge-danger badge-counter">{{ users|length -1}}</span>
                 </a>
-
+            </li>
+            {% endif %}
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -80,7 +89,7 @@
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                      aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="{{ path('user_edit', {'id': app.user.id}) }}">
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                         Profile
                     </a>

@@ -47,9 +47,9 @@ class RegistrationFormType extends AbstractType
             ))
             ->add('formule', ChoiceType::class, [
                 'choices'  => [
-                    '10Mo' => 1,
-                    '100Mo' => 2,
-                    '1Go' => 3,
+                    '1Mo' => 1,
+                    '10Mo' => 2,
+                    '100Mo' => 3,
                 ]]
             )
             ->add('agreeTerms', CheckboxType::class, [

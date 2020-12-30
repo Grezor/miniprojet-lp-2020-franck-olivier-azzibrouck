@@ -138,6 +138,7 @@ class FichierController extends AbstractController
             $entityManager->persist($choixformule);
             $entityManager->remove($fichier);
             $entityManager->flush();
+
         }
         return $this->redirectToRoute('dossier_show',['id'=>$dossier_parent]);
 

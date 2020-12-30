@@ -36,7 +36,7 @@ class NavbarController extends AbstractController
 
         return $this->render('navbar/topbar.html.twig', [
             'controller_name' => 'topbarController',
-            'users'=>$userRepository->findBy(["roles"=>"ROLE_USER"]),
+            'users'=>$userRepository->findAll(),
         ]);
     }
 
