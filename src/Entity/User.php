@@ -231,7 +231,7 @@ class User implements UserInterface
         return $this->isVerified;
     }
 
-    public function setIsVerified(bool $isVerified): self
+    public function setIsVerified(bool $isVerified)
     {
         $this->isVerified = $isVerified;
 
@@ -290,6 +290,17 @@ class User implements UserInterface
     public function setFormule($formule): void
     {
         $this->formule = $formule;
+    }
+
+
+    /**
+     * @return array
+     * notre tableau de captcha
+     */
+    public function captcha():array
+    {
+        $captcha=array("Mcd1","hy3A","b7m8","kfY5");
+        return $captcha;
     }
 
 

@@ -1,6 +1,48 @@
 {
+    "amphp/amp": {
+        "version": "v2.5.1"
+    },
+    "amphp/byte-stream": {
+        "version": "v1.8.0"
+    },
+    "amphp/cache": {
+        "version": "v1.4.0"
+    },
+    "amphp/dns": {
+        "version": "v1.2.3"
+    },
+    "amphp/hpack": {
+        "version": "v3.1.0"
+    },
+    "amphp/http": {
+        "version": "v1.6.3"
+    },
+    "amphp/http-client": {
+        "version": "v4.5.5"
+    },
+    "amphp/parser": {
+        "version": "v1.0.0"
+    },
+    "amphp/process": {
+        "version": "v1.1.0"
+    },
+    "amphp/serialization": {
+        "version": "v1.0.0"
+    },
+    "amphp/socket": {
+        "version": "v1.1.3"
+    },
+    "amphp/sync": {
+        "version": "v1.4.0"
+    },
+    "amphp/windows-registry": {
+        "version": "v0.3.3"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
+    },
+    "daverandom/libdns": {
+        "version": "v2.0.2"
     },
     "doctrine/annotations": {
         "version": "1.0",
@@ -81,6 +123,9 @@
     "egulias/email-validator": {
         "version": "2.1.24"
     },
+    "kelunik/certificate": {
+        "version": "v1.1.2"
+    },
     "laminas/laminas-code": {
         "version": "3.5.1"
     },
@@ -89,6 +134,15 @@
     },
     "laminas/laminas-zendframework-bridge": {
         "version": "1.1.1"
+    },
+    "league/uri": {
+        "version": "6.4.0"
+    },
+    "league/uri-interfaces": {
+        "version": "2.2.0"
+    },
+    "league/uri-parser": {
+        "version": "1.4.1"
     },
     "monolog/monolog": {
         "version": "2.1.1"
@@ -117,6 +171,9 @@
     "psr/event-dispatcher": {
         "version": "1.0.0"
     },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/link": {
         "version": "1.0.0"
     },
@@ -134,6 +191,9 @@
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "swiftmailer/swiftmailer": {
+        "version": "v6.2.4"
     },
     "symfony/asset": {
         "version": "v5.2.0"
@@ -247,6 +307,15 @@
             "./src/Controller/.gitignore",
             "./src/Kernel.php"
         ]
+    },
+    "symfony/google-mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "f8fd4ddb9b477510f8f4bce2b9c054ab428c0120"
+        }
     },
     "symfony/http-client": {
         "version": "v5.2.0"
@@ -409,6 +478,15 @@
     "symfony/security-http": {
         "version": "v5.2.0"
     },
+    "symfony/sendgrid-mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "b46e4f8f1adb2864f0aa9c0ff57aea3324a07199"
+        }
+    },
     "symfony/serializer": {
         "version": "v5.2.0"
     },
@@ -423,6 +501,20 @@
     },
     "symfony/string": {
         "version": "v5.2.0"
+    },
+    "symfony/swiftmailer-bundle": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "ae4d22af30bbd484506bc1817c5a3ef72c855b93"
+        },
+        "files": [
+            "./config/packages/dev/swiftmailer.yaml",
+            "./config/packages/swiftmailer.yaml",
+            "./config/packages/test/swiftmailer.yaml"
+        ]
     },
     "symfony/test-pack": {
         "version": "v1.0.7"

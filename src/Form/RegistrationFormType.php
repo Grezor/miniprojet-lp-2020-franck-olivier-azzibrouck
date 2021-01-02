@@ -46,11 +46,11 @@ class RegistrationFormType extends AbstractType
                 'label' => false,
             ))
             ->add('formule', ChoiceType::class, [
-                'choices'  => [
-                    '1Mo' => 1,
-                    '10Mo' => 2,
-                    '100Mo' => 3,
-                ]]
+                    'choices'  => [
+                        '1Mo' => 1,
+                        '10Mo' => 2,
+                        '100Mo' => 3,
+                    ]]
             )
             ->add('agreeTerms', CheckboxType::class, [
                 'label' => 'valider vos informations',

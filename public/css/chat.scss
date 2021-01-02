@@ -1,0 +1,471 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:300');
+
+body {
+  background-image: linear-gradient(-180deg, blue, #00948f);
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.about {
+  $cubic: cubic-bezier(0.64, 0.01, 0.07, 1.65);
+  $transition: 0.6s $cubic;
+  $size: 40px;
+  position: fixed;
+  z-index: 10;
+  bottom: 10px;
+  right: 10px;
+  width: $size;
+  height: $size;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  transition: all 0.2s ease;
+
+  .bg_links {
+    width: $size;
+    height: $size;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(#000000, 0.2);
+    border-radius: 100%;
+    backdrop-filter: blur(5px);
+    position: absolute;
+  }
+
+  .logo {
+    width: $size;
+    height: $size;
+    z-index: 9;
+    background-image: url(https://rafaelalucas91.github.io/assets/codepen/logo_white.svg);
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: 10px 7px;
+    opacity: 0.9;
+    transition: all 1s 0.2s ease;
+    bottom: 0;
+    right: 0;
+  }
+
+  .social {
+    opacity: 0;
+    right: 0;
+    bottom: 0;
+
+    .icon {
+      width: 100%;
+      height: 100%;
+      background-size: 20px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: transparent;
+      display: flex;
+      transition: all 0.2s ease, background-color 0.4s ease;
+      opacity: 0;
+      border-radius: 100%;
+    }
+
+    &.portfolio {
+      transition: all 0.8s ease;
+
+      .icon {
+        background-image: url(https://rafaelalucas91.github.io/assets/codepen/link.svg);
+      }
+    }
+
+    &.dribbble {
+      transition: all 0.3s ease;
+      .icon {
+        background-image: url(https://rafaelalucas91.github.io/assets/codepen/dribbble.svg);
+      }
+    }
+
+    &.linkedin {
+      transition: all 0.8s ease;
+      .icon {
+        background-image: url(https://rafaelalucas91.github.io/assets/codepen/linkedin.svg);
+      }
+    }
+  }
+
+  &:hover {
+    width: 105px;
+    height: 105px;
+    transition: all $transition;
+
+    .logo {
+      opacity: 1;
+      transition: all 0.6s ease;
+    }
+
+    .social {
+      opacity: 1;
+
+      .icon {
+        opacity: 0.9;
+      }
+
+      &:hover {
+        background-size: 28px;
+        .icon {
+          background-size: 65%;
+          opacity: 1;
+        }
+      }
+
+      &.portfolio {
+        right: 0;
+        bottom: calc(100% - 40px);
+        transition: all 0.3s 0s $cubic;
+        .icon {
+          &:hover {
+            background-color: #698fb7;
+          }
+        }
+      }
+
+      &.dribbble {
+        bottom: 45%;
+        right: 45%;
+        transition: all 0.3s 0.15s $cubic;
+        .icon {
+          &:hover {
+            background-color: #ea4c89;
+          }
+        }
+      }
+
+      &.linkedin {
+        bottom: 0;
+        right: calc(100% - 40px);
+        transition: all 0.3s 0.25s $cubic;
+        .icon {
+          &:hover {
+            background-color: #0077b5;
+          }
+        }
+      }
+    }
+  }
+}
+
+.content {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+}
+
+.wall {
+  background-color: #d6d6d6;
+  width: 500px;
+  height: 70px;
+  bottom: 30%;
+  position: absolute;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+.wall::before,
+.wall::after {
+  width: 20px;
+  height: 40px;
+  left: 20%;
+  bottom: -40px;
+  background-color: #737373;
+  position: absolute;
+  content: '';
+  border-radius: 0px 0px 20px 20px;
+}
+
+.wall::after {
+  left: 75%;
+}
+
+.cat {
+  width: 200px;
+  height: 250px;
+  background-color: #e4a547;
+  border-radius: 100%;
+  position: absolute;
+  bottom: calc(30% + 20px);
+  box-shadow: inset 0px -20px 0px rgba(0, 0, 0, 0.2);
+}
+
+.cat::after {
+  width: 60%;
+  height: 60%;
+  left: 20%;
+  top: 45%;
+  background-color: white;
+  position: absolute;
+  content: '';
+  border-radius: 100%;
+  opacity: 0.2;
+}
+
+.ears {
+  position: relative;
+  z-index: -1;
+}
+
+.ears span {
+  width: 60px;
+  height: 60px;
+  background-color: #d47151;
+  position: absolute;
+  top: -5px;
+  border: solid 8px #e4a547;
+  border-radius: 10px;
+}
+
+.ears span:nth-child(1) {
+  left: 30px;
+  box-shadow: inset 0px 5px 0px rgba(0, 0, 0, 0.1);
+  animation: ear1 8s ease infinite;
+}
+
+@keyframes ear1 {
+  0%, 80%, 100% { transform: rotate(20deg);}
+  90% {transform: rotate(8deg);}
+}
+
+.ears span:nth-child(2) {
+  right: 30px;
+  box-shadow: inset 0px 5px 0px rgba(0, 0, 0, 0.1);
+  animation: ear2 8s ease infinite;
+}
+
+@keyframes ear2 {
+  0%, 80%, 100% {transform: rotate(-20deg);}
+  90% {transform: rotate(-8deg);}
+}
+
+.eyes span {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 30px;
+  border-radius: 100%;
+  background-color: white;
+}
+
+.eyes span:nth-child(1) {
+  left: 50px;
+}
+
+.eyes span:nth-child(2) {
+  right: 50px;
+}
+
+.eyes span:nth-child(1)::after,
+.eyes span:nth-child(2)::after {
+  width: inherit;
+  height: inherit;
+  left: 0;
+  position: absolute;
+  content: '';
+  z-index:1;
+  border-radius: 100%;
+  animation: blink 8s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 70% {box-shadow: inset 0px 5px 0px #ce8314;}
+  85% {box-shadow: inset 0px 40px 0px #ce8314;}
+  100% {box-shadow: inset 0px 5px 0px #ce8314;}
+}
+
+.eyes span:nth-child(3),
+.eyes span:nth-child(4) {
+  width: 10px;
+  height: 10px;
+  background-color: black;
+  position: absolute;
+  box-shadow: none;
+  top: 45px;
+  left: 65px;
+  border-radius: 100%;
+}
+.eyes span:nth-child(4) {
+  left: 125px;
+}
+
+.eyes span:nth-child(1)::before {
+  left: 35%;
+}
+
+.eyes span:nth-child(2)::before {
+  right: 35%;
+}
+
+.nose {
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 70px;
+  left: calc(50% - 12px);
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 12px solid #d47151;
+  z-index: 1;
+  animation: nose 6s ease infinite;
+}
+
+@keyframes nose {
+  0%, 80%, 100%{transform: rotate(0deg);}
+  85%, 95% {transform: rotate(-2deg);}
+  90% {transform: rotate(2deg);}
+}
+
+.nose span {
+  width: 120px;
+  height: 2px;
+  background-color: white;
+  position: absolute;
+  top: -6px;
+  left: -125px;
+  border-radius: 5px;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.nose span:nth-child(2) {
+  left: 5px;
+}
+
+.nose span::after,
+.nose span::before  {
+  width: inherit;
+  height: inherit;
+  content: '';
+  position: absolute;
+  background-color: inherit;
+  top: -10px;
+  width: 110px;
+  left: 10px;
+  border-radius: inherit;
+  transform: rotate(10deg);
+}
+
+.nose span:nth-child(1)::before {
+  transform: rotate(-10deg);
+  top: 10px;
+  left: 10px;
+}
+
+.nose span:nth-child(2)::after{
+  top: -10px;
+  transform: rotate(-10deg);
+  left: 0px;
+}
+
+.nose span:nth-child(2)::before {
+  top: 10px;
+  left: 0px;
+}
+
+.mouth {
+  font-family: 'Nunito', sans-serif;
+  color: #d28422;
+  font-size: 30px;
+  transform: rotate(90deg);
+  top: 72px;
+  position: absolute;
+  left: calc(50% - 10px);
+  letter-spacing: 1px;
+  font-weight: 100;
+  animation: mouth 6s ease infinite;
+}
+
+@keyframes mouth {
+  0%, 80%, 90%, 100%{top: 75px}
+  85%, 95% {top: 73px}
+}
+
+.mouth::after {
+  width: 2px;
+  height: 15px;
+  content: '';
+  position: absolute;
+  background-color: #d28422;
+  top: 12px;
+  left: -1px;
+  transform: rotate(90deg);
+}
+
+.paws {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 30px;
+  border-radius: 100%;
+  z-index: 1;
+}
+
+.paws span {
+  width: 30px;
+  height: 30px;
+  background-color: brown;
+  position: absolute;
+  bottom: -160px;
+  border-radius: 100%;
+  opacity: 0.3;
+  box-shadow: inset 5px 0px 0px rgba(0, 0, 0, 0.5)
+}
+
+.paws span:nth-child(1) {
+  left: 50px;
+}
+.paws span:nth-child(2) {
+  left: 120px;
+}
+
+.tail {
+  width: 100px;
+  height: 15px;
+  position: absolute;
+  bottom: 50px;
+  border-radius: 30px;
+  z-index: 1;
+  right: -65px;
+  background-color: #e4a547;
+  z-index: -1;
+  animation: tail 3s ease-in-out infinite alternate;
+}
+@keyframes tail {
+  0% {right:-65px;}
+  50% {transform:rotate(0deg);}
+  60% {transform:rotate(-180deg);}
+  100% {right:145px; transform:rotate(-180deg);}
+}
+
+.tail::after {
+  width: 25%;
+  height: inherit;
+  content: '';
+  position: absolute;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  background-color: white;
+  right: 0px;
+  opacity: 0.2;
+}
+
+.tail::before {
+  width: 10%;
+  height: inherit;
+  content: '';
+  position: absolute;
+  border-radius: 0px;
+  background-color: black;
+  right: 25%;
+  opacity: 0.1;
+}

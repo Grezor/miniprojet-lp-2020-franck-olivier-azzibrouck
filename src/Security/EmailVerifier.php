@@ -36,18 +36,17 @@ class EmailVerifier
         $context['expiresAt'] = $signatureComponents->getExpiresAt();
 
         $email->context($context);
-
         $this->mailer->send($email);
     }
 
     /**
+     * @param Request $request
+     * @param UserInterface $user
      * @throws VerifyEmailExceptionInterface
      */
     public function handleEmailConfirmation(Request $request, UserInterface $user): void
     {
         $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
-
-        $user->setIsVerified(true);
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();

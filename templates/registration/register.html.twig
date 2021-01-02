@@ -11,70 +11,70 @@
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
-    <body class="bg-gradient-primary">
+<body class="bg-gradient-primary">
 
-    <div class="container">
+<div class="container">
 
-        <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Créer votre compte!</h1>
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Créer votre compte!</h1>
+                        </div>
+                        {% if app.user %}
+                            <div class="mb-3 text-center">
+                                Vous êtes déja connecté {{ app.user.nom }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
                             </div>
-                            {% if app.user %}
-                                <div class="mb-3 text-center">
-                                    Vous êtes déja connecté {{ app.user.nom }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
-                                </div>
-                            {% endif %}
-                            {{ form_start(registrationForm) }}
-                            <div class="user">
-                                <div class="form-group">
-                                   {{ form_row(registrationForm.nom) }}
-                                   {{ form_row(registrationForm.prenom) }}
-                                </div>
-                                <div class="form-group">
-                                    {{ form_row(registrationForm.email) }}
-                                </div>
-                                <div class="form-group">
-                                    {{ form_row(registrationForm.formule) }}
-                                </div>
-                                <div class="form-group">
-                                    <p class="h3" align="center">{{ captcha }}</p>
-                                    <p class="h3" align="center" style="color: red">{{ error }}</p>
-                                    {{ form_row(registrationForm.captcha,
-                                        {'attr': {'placeholder': 'saisir le captcha :'
+                        {% endif %}
+                        {{ form_start(registrationForm) }}
+                        <div class="user">
+                            <div class="form-group">
+                                {{ form_row(registrationForm.nom) }}
+                                {{ form_row(registrationForm.prenom) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(registrationForm.email) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(registrationForm.formule) }}
+                            </div>
+                            <div class="form-group">
+                                <p class="h3" align="center">{{ captcha }}</p>
+                                <p class="h3" align="center" style="color: red">{{ error }}</p>
+                                {{ form_row(registrationForm.captcha,
+                                    {'attr': {'placeholder': 'saisir le captcha :'
 
-                                           }}) }}
-                                </div>
-                                <div class="form-group">
-                                            {{ form_row(registrationForm.plainPassword.first) }}
-                                    <div id="exampleRepeatPassword">
-                                            {{ form_row(registrationForm.plainPassword.second) }}
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                        {{ form_row(registrationForm.agreeTerms) }}
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-user btn-block">
-                                   Créer votre compte
-                                </button>
-                                <hr>
+                                    }}) }}
                             </div>
-                            {{ form_end(registrationForm) }}
-                            <div class="text-center">
-                                <a class="small" href="{{ path('app_login') }}">Déjà un compte, connectez vous ici!</a>
+                            <div class="form-group">
+                                {{ form_row(registrationForm.plainPassword.first) }}
+                                <div id="exampleRepeatPassword">
+                                    {{ form_row(registrationForm.plainPassword.second) }}
+                                </div>
                             </div>
+                            <div class="form-group">
+                                {{ form_row(registrationForm.agreeTerms) }}
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-user btn-block">
+                                Créer votre compte
+                            </button>
+                            <hr>
+                        </div>
+                        {{ form_end(registrationForm) }}
+                        <div class="text-center">
+                            <a class="small" href="{{ path('app_login') }}">Déjà un compte, connectez vous ici!</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
+
+</div>
 {#    <!-- Footer -->#}
 {#    <footer class="sticky-footer " style="position: absolute;  bottom: 0;  width: 100%;  margin-top: 50px;">#}
 {#        <div class="container my-auto">#}
@@ -85,4 +85,3 @@
 {#    </footer>#}
 {#    <!-- End of Footer -->#}
 {% endblock %}
-
