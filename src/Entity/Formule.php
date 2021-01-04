@@ -24,6 +24,8 @@ class Formule
      */
     private $libelle;
 
+
+
     /**
      * @ORM\Column(type="float")
      */
@@ -52,17 +54,6 @@ class Formule
         return $this->id;
     }
 
-    public function getLibelle(): ?int
-    {
-        return $this->libelle;
-    }
-
-    public function setLibelle(int $libelle): self
-    {
-        $this->libelle = $libelle;
-
-        return $this;
-    }
 
     public function getTaille(): ?float
     {
@@ -105,7 +96,24 @@ class Formule
 
         return $this;
     }
+    /**
+     * @return mixed
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
+    }
 
+    /**
+     * @param mixed $libelle
+     */
+    public function setLibelle($libelle): void
+    {
+        $this->libelle = $libelle;
+    }
+    /**
+     * @return mixed
+     */
     public function __toString()
     {
         return $this->libelle;

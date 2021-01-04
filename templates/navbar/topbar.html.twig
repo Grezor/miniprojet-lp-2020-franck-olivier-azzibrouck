@@ -1,4 +1,12 @@
-
+<!doctype html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
 {% block body %}
     <!-- Topbar -->
     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -11,74 +19,74 @@
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
 
-{#            <!-- Nav Item - Alerts -->#}
-{#            <li class="nav-item dropdown no-arrow mx-1">#}
-{#                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"#}
-{#                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
-{#                    <i class="fas fa-bell fa-fw" style="font-size:30px;color:navajowhite;"></i>#}
-{#                    <!-- Counter - Alerts -->#}
-{#                    <span class="badge badge-danger badge-counter">3+</span>#}
-{#                </a>#}
-{#                <!-- Dropdown - Alerts -->#}
-{#                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"#}
-{#                     aria-labelledby="alertsDropdown">#}
-{#                    <h6 class="dropdown-header">#}
-{#                        Alerts Center#}
-{#                    </h6>#}
-{#                    <a class="dropdown-item d-flex align-items-center" href="#">#}
-{#                        <div class="mr-3">#}
-{#                            <div class="icon-circle bg-primary">#}
-{#                                <i class="fas fa-file-alt text-white"></i>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div>#}
-{#                            <div class="small text-gray-500">December 12, 2019</div>#}
-{#                            <span class="font-weight-bold">A new monthly report is ready to download!</span>#}
-{#                        </div>#}
-{#                    </a>#}
-{#                    <a class="dropdown-item d-flex align-items-center" href="#">#}
-{#                        <div class="mr-3">#}
-{#                            <div class="icon-circle bg-success">#}
-{#                                <i class="fas fa-donate text-white"></i>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div>#}
-{#                            <div class="small text-gray-500">December 7, 2019</div>#}
-{#                            $290.29 has been deposited into your account!#}
-{#                        </div>#}
-{#                    </a>#}
-{#                    <a class="dropdown-item d-flex align-items-center" href="#">#}
-{#                        <div class="mr-3">#}
-{#                            <div class="icon-circle bg-warning">#}
-{#                                <i class="fas fa-exclamation-triangle text-white"></i>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div>#}
-{#                            <div class="small text-gray-500">December 2, 2019</div>#}
-{#                            Spending Alert: We've noticed unusually high spending for your account.#}
-{#                        </div>#}
-{#                    </a>#}
-{#                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>#}
-{#                </div>#}
-{#            </li>            <!-- Nav Item - Alerts -->#}
+            {#            <!-- Nav Item - Alerts -->#}
+            {#            <li class="nav-item dropdown no-arrow mx-1">#}
+            {#                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"#}
+            {#                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+            {#                    <i class="fas fa-bell fa-fw" style="font-size:30px;color:navajowhite;"></i>#}
+            {#                    <!-- Counter - Alerts -->#}
+            {#                    <span class="badge badge-danger badge-counter">3+</span>#}
+            {#                </a>#}
+            {#                <!-- Dropdown - Alerts -->#}
+            {#                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"#}
+            {#                     aria-labelledby="alertsDropdown">#}
+            {#                    <h6 class="dropdown-header">#}
+            {#                        Alerts Center#}
+            {#                    </h6>#}
+            {#                    <a class="dropdown-item d-flex align-items-center" href="#">#}
+            {#                        <div class="mr-3">#}
+            {#                            <div class="icon-circle bg-primary">#}
+            {#                                <i class="fas fa-file-alt text-white"></i>#}
+            {#                            </div>#}
+            {#                        </div>#}
+            {#                        <div>#}
+            {#                            <div class="small text-gray-500">December 12, 2019</div>#}
+            {#                            <span class="font-weight-bold">A new monthly report is ready to download!</span>#}
+            {#                        </div>#}
+            {#                    </a>#}
+            {#                    <a class="dropdown-item d-flex align-items-center" href="#">#}
+            {#                        <div class="mr-3">#}
+            {#                            <div class="icon-circle bg-success">#}
+            {#                                <i class="fas fa-donate text-white"></i>#}
+            {#                            </div>#}
+            {#                        </div>#}
+            {#                        <div>#}
+            {#                            <div class="small text-gray-500">December 7, 2019</div>#}
+            {#                            $290.29 has been deposited into your account!#}
+            {#                        </div>#}
+            {#                    </a>#}
+            {#                    <a class="dropdown-item d-flex align-items-center" href="#">#}
+            {#                        <div class="mr-3">#}
+            {#                            <div class="icon-circle bg-warning">#}
+            {#                                <i class="fas fa-exclamation-triangle text-white"></i>#}
+            {#                            </div>#}
+            {#                        </div>#}
+            {#                        <div>#}
+            {#                            <div class="small text-gray-500">December 2, 2019</div>#}
+            {#                            Spending Alert: We've noticed unusually high spending for your account.#}
+            {#                        </div>#}
+            {#                    </a>#}
+            {#                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>#}
+            {#                </div>#}
+            {#            </li>            <!-- Nav Item - Alerts -->#}
 
 
             <!-- Nav Item - Formules -->
             <li class="nav-item mx-1" >
-                <a class="nav-link overflow-auto" href="{{ path('user_index') }}" title="Modifier la formule">
+                <a class="nav-link overflow-auto" href="" title="Modifier la formule" data-toggle="modal" data-target="#formuleModale">
                     <i class="fas fa-clipboard-list fa-fw" style="font-size:30px;color:navajowhite;"></i>
                 </a>
             </li>
 
             {% if is_granted( 'ROLE_ADMIN') %}
-            <!-- Nav Item - list users -->
-            <li class="nav-item no-arrow mx-1" >
-                <a class="nav-link overflow-auto" href="{{ path('user_index') }}" title="liste des utlisateurs">
-                    <i class="fas fa-user-friends fa-fw" style="font-size:30px;color:navajowhite;"></i>
-                    <!-- Counter - users -->
-                    <span class="badge badge-danger badge-counter">{{ users|length -1}}</span>
-                </a>
-            </li>
+                <!-- Nav Item - list users -->
+                <li class="nav-item no-arrow mx-1" >
+                    <a class="nav-link overflow-auto" href="{{ path('user_index') }}" title="liste des utlisateurs">
+                        <i class="fas fa-user-friends fa-fw" style="font-size:30px;color:navajowhite;"></i>
+                        <!-- Counter - users -->
+                        <span class="badge badge-danger badge-counter">{{ users|length -1}}</span>
+                    </a>
+                </li>
             {% endif %}
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
@@ -116,7 +124,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Vous allez être déconnecté de votre compte</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
                     <a class="btn btn-primary" href="{{ path('app_logout') }}">Deconnexion</a>
@@ -124,6 +132,58 @@
             </div>
         </div>
     </div>
+    <!-- formule Modal-->
+    <div class="modal fade" id="formuleModale" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Envie de plus d'espace?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form  action="{{ path('topbar') }}" method="post">
+                        <fieldset>
+                            <legend>Votre formule actuelle:</legend>
+                            <div class="form-group row">
+                                {% for maFormule in app.user.choixFormules %}
 
+                                    <div class="col-sm-10">
+                                        <label class="form-check-label col-3 ">
+                                            <input class="form-check-input " type="radio"  checked="" disabled="">
+                                            {{ maFormule.formule }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <fieldset class="form-group">
+                                <legend>Formules disponibles</legend>
+                                <div class="form-check row">
+                                    {% for formule in formules %}
+                                        <label class="form-check-label col-3">
+                                            <input class="form-check-input" value="{{ formule.libelle }}" name="formule" type="radio">
+                                            {{ formule.libelle }}
+                                        </label>
+                                    {% endfor %}
+                                </div>
+                            </fieldset>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Modifier</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
+    <script >
+        $(document).ready(function() {
+            $("#formuleModale").modal('show');
+        });
+    </script>
 {% endblock %}
+
+</body>
