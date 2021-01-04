@@ -34,8 +34,8 @@ class EmailVerifier
         $context = $email->getContext();
         $context['signedUrl'] = $signatureComponents->getSignedUrl();
         $context['expiresAt'] = $signatureComponents->getExpiresAt();
-
         $email->context($context);
+
         $this->mailer->send($email);
     }
 
@@ -48,6 +48,7 @@ class EmailVerifier
     {
         $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
 
+        $user->setIsVerified(true);
         $this->entityManager->persist($user);
         $this->entityManager->flush();
     }

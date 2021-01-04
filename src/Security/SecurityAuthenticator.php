@@ -99,7 +99,7 @@ class SecurityAuthenticator extends AbstractFormLoginAuthenticator implements Pa
         $roles= $token->getUser()->getRoles();
         switch ($roles) {
             case $roles[0]== "ROLE_ADMIN":
-                return new RedirectResponse($this->urlGenerator->generate('user'));
+                return new RedirectResponse($this->urlGenerator->generate('user_index'));
                 break;
             case $roles[0]== "ROLE_user":
                 return new RedirectResponse($this->urlGenerator->generate('home'));

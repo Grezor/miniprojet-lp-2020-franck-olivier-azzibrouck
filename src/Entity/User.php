@@ -54,7 +54,6 @@ class User implements UserInterface
 
     /**
      * @Assert\Length(4)
-     * @Assert\NotBlank()
      */
     protected $captcha;
 
@@ -65,10 +64,29 @@ class User implements UserInterface
      */
     private $dossiers;
 
-
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $activation_token;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @return mixed
+     */
+    public function getActivationToken()
+    {
+        return $this->activation_token;
+    }
+
+    /**
+     * @param mixed $activation_token
+     */
+    public function setActivationToken($activation_token): void
+    {
+        $this->activation_token = $activation_token;
+    }
+
+    /**
+     * @ORM\Column(type="boolean",name="isVerified")
      */
     private $isVerified = false;
 
