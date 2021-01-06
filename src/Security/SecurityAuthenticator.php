@@ -97,8 +97,14 @@ class SecurityAuthenticator extends AbstractFormLoginAuthenticator implements Pa
         }
         //On récupère le role du user via le token
         $roles= $token->getUser()->getRoles();
+        //on vérifie si le compte est vérifiéz
+        $is_verified= $token->getUser()->isVerified();
+
         switch ($roles) {
-            case $roles[0]== "ROLE_ADMIN":
+            case $is_verified== false:
+                return new RedirectResponse($this->urlGenerator->generate('app_login'));
+                break;
+                case $roles[0]== "ROLE_ADMIN":
                 return new RedirectResponse($this->urlGenerator->generate('user_index'));
                 break;
             case $roles[0]== "ROLE_user":

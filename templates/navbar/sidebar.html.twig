@@ -37,7 +37,8 @@
                      bg-success
                     {% endif %}
                    " role="progressbar" style="width: {{ taille_disponible*100/taille_formule }}%"
-                     aria-valuenow={{ taille_disponible }} aria-valuemin="0" aria-valuemax="{{taille_formule }}" title="il vous reste {{ taille_disponible }}Mo"></div>
+                     aria-valuenow={{ taille_disponible }} aria-valuemin="0" aria-valuemax="{{taille_formule }}" title="il vous reste {{ taille_disponible }}Mo"
+                {% if taille_disponible<=0 %} onload="modifier_formule()"{% endif %}></div>
             </div>
             </p>
             <p align="center"> Disponible</p>

@@ -32,6 +32,7 @@ class DossierController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $error="";
         $user=$this->getUser();
         $dossier = new Dossier();
         $form = $this->createForm(DossierType::class, $dossier);
@@ -60,6 +61,7 @@ class DossierController extends AbstractController
      */
     public function show(Request $request,Dossier $dossier): Response
     {
+        $erreur="";
         $user=$this->getUser();
         $newdossier = new Dossier();
         $fichiers= $dossier->getFichiers();
@@ -79,15 +81,8 @@ class DossierController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newdossier);
             $entityManager->flush();
+            return $this->redirectToRoute('dossier_show',['id'=>$dossier->getId()]);
 
-            return $this->render('dossier/show.html.twig', [
-                'dossier' => $dossier,
-                'fichiers'=>$fichiers,
-                'dossiers'=>$dossier->getDossiers(),
-                'form1' => $form1->createView(),
-                'form2' => $form2->createView(),
-
-            ]);
 
         }
 
@@ -102,7 +97,16 @@ class DossierController extends AbstractController
                 //On récupère la taille de disponible dans notre memoire
                 $taille_disponible= $choixformule->getTailleDisponible();
                 $nouvelle_taille_disponible =  $taille_disponible - $filetaille ;
+                //si la memoire disponible est inférieur à zéro
+                if ($nouvelle_taille_disponible<=0)
+                {
+                    $this->addFlash('erreur', 'Votre mémoire est insuffiante');
+                    $erreur= "espace diponible insuffisant";
+                    return $this->redirectToRoute('dossier_show',[
+                        'id'=>$dossier->getId(),
+                    ]);
 
+                }
                 //on récupere le nom du document uploader
                 $originalFilename = pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME);
                 //$safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
@@ -117,6 +121,15 @@ class DossierController extends AbstractController
                 {
 
                 }
+                //si la memoire disponible est inférieur à zéro
+                if ($nouvelle_taille_disponible<=0)
+                {
+                    $this->addFlash('erreur', 'Votre mémoire est insuffiante');
+                    return $this->redirectToRoute('dossier_show',[
+                        'id'=>$dossier->getId(),
+                    ]);
+
+                }
 
                 $fichier->setLibelle($newFilename);
                 $fichier->setTaille($filetaille);
@@ -126,23 +139,8 @@ class DossierController extends AbstractController
                 $entityManager->persist($fichier,$choixformule);
                 $entityManager->flush();
 
-                return $this->render('dossier/show.html.twig', [
-                    'dossier' => $dossier,
-                    'fichiers'=>$fichiers,
-                    'dossiers'=>$dossier->getDossiers(),
-                    'form1' => $form1->createView(),
-                    'form2' => $form2->createView(),
-
-                ]);
+                return $this->redirectToRoute('dossier_show',['id'=>$dossier->getId()]);
             }
-            return $this->render('dossier/show.html.twig', [
-                'dossier' => $dossier,
-                'fichiers'=>$fichiers,
-                'dossiers'=>$dossier->getDossiers(),
-                'form1' => $form1->createView(),
-                'form2' => $form2->createView(),
-
-            ]);
 
         }
 

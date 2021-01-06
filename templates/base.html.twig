@@ -11,10 +11,12 @@
             <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
                     rel="stylesheet">
         {% endblock %}
-    </head>
-    <body id="page-top">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-        <!-- Page Wrapper -->
+    </head>
+    {% for formule in app.user.getChoixformules %}
+    <body {% if formule.getTailleDisponible() <=0.90 %} onload="modifier_formule()"{% endif %}>
+    {% endfor %}
         <div id="wrapper">
             <!-- Sidebar -->
         {{ render(path('sidebar')) }}
@@ -26,10 +28,21 @@
                     <!-- Topbar -->
                     {{ render(path('topbar')) }}
                     {% block body %}{% endblock %}
+
+
             {% block javascripts %}
+{#                script pour lancer la modification de la formeul en cas de memoire insuffisante#}
+                <script >
+
+                    function modifier_formule(){
+                        $("#formuleModale").modal('show');
+                    }
+
+                </script>
                 <!-- Bootstrap core JavaScript-->
                 <script src="{{ asset('vendor/jquery/jquery.min.js') }}">
                     $('.dropdown-toggle').dropdown();
+
                 </script>
                 <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
                 <!-- Core plugin JavaScript-->
