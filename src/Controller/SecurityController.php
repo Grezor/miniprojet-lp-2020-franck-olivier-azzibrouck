@@ -20,7 +20,8 @@ class SecurityController extends AbstractController
          {
              if ($this->getUser()->isVerified()==false)
              {
-                 $not_verified = "Votre compte n'est pas actif, vérifier votre boite email";
+                 $this->addFlash('error_login', 'Votre compte n\'est pas actif, vérifier votre boite email');
+
              }
 
          }
@@ -34,7 +35,6 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
-            'not_verified'=>$not_verified
         ]);
     }
 

@@ -111,6 +111,13 @@ class Fichier
 
         return $this;
     }
+    function convertisseur($octet)
+    {
+//        // Array contenant les differents unités
+//        $unite = array('octet','ko','Mo','go');
+        $mo = round($octet/(1024*1024),2);
+        return $mo;
 
+    }
 
 }

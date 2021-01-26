@@ -52,15 +52,6 @@ class RegistrationFormType extends AbstractType
                         '100Mo' => 3,
                     ]]
             )
-            ->add('agreeTerms', CheckboxType::class, [
-                'label' => 'valider vos informations',
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'valider vos informations',
-                    ]),
-                ],
-            ])
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'invalid_message' => 'Vos mots de passes ne concordent pas',

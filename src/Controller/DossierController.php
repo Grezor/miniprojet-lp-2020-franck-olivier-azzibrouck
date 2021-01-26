@@ -93,7 +93,7 @@ class DossierController extends AbstractController
             if ($document)
             {
                 //on récupère la taille du fichier et on la convertie en Mo
-                $filetaille=$this->convertisseur(filesize($document));
+                $filetaille=$fichier->convertisseur(filesize($document));
                 //On récupère la taille de disponible dans notre memoire
                 $taille_disponible= $choixformule->getTailleDisponible();
                 $nouvelle_taille_disponible =  $taille_disponible - $filetaille ;
@@ -211,12 +211,4 @@ class DossierController extends AbstractController
     }
 
 
-    function convertisseur($octet)
-    {
-//        // Array contenant les differents unités
-//        $unite = array('octet','ko','Mo','go');
-        $mo = round($octet/(1024*1024),2);
-        return $mo;
-
-    }
 }

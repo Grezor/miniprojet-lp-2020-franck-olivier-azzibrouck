@@ -95,10 +95,16 @@ class User implements UserInterface
      */
     private $choixformules;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Email::class, mappedBy="admin")
+     */
+    private $emails;
+
     public function __construct()
     {
         $this->dossiers = new ArrayCollection();
         $this->choixformules = new ArrayCollection();
+        $this->emails = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -319,6 +325,36 @@ class User implements UserInterface
     {
         $captcha=array("Mcd1","hy3A","b7m8","kfY5");
         return $captcha;
+    }
+
+    /**
+     * @return Collection|Email[]
+     */
+    public function getEmails(): Collection
+    {
+        return $this->emails;
+    }
+
+    public function addEmail(Email $email): self
+    {
+        if (!$this->emails->contains($email)) {
+            $this->emails[] = $email;
+            $email->setAdmin($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmail(Email $email): self
+    {
+        if ($this->emails->removeElement($email)) {
+            // set the owning side to null (unless already changed)
+            if ($email->getAdmin() === $this) {
+                $email->setAdmin(null);
+            }
+        }
+
+        return $this;
     }
 
 

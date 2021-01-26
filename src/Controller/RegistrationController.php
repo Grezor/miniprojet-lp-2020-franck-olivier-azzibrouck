@@ -100,13 +100,15 @@ class RegistrationController extends AbstractController
                 try {
                     $mailer->send($email);
                 } catch (TransportExceptionInterface $e) {
-                    // some error prevented the email sending; display an
-                    // error message or try to resend the message
-                }
-                // do anything else you need here, like send an email
 
-                return $this->redirectToRoute('attente_email');
-            }
+                }
+                //l'utilisateur se connecte
+                return $guardHandler->authenticateUserAndHandleSuccess(
+                    $user,
+                    $request,
+                    $authenticator,
+                    'main' // firewall name in security.yaml
+                );            }
             //si le captcha est différent
             if(!in_array($form['captcha']->getData(),$captcha)){
                 $error="le captcha ne correspond pas";
@@ -130,14 +132,15 @@ class RegistrationController extends AbstractController
      */
     public function attente_email(): Response
     {
-
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Your email address has been verified.');
+
         return $this->render('registration/attente_email.html.twig', [
         ]);
 
 
     }
+
 
     /**
      * @Route("/activation/{token}", name="activation_compte")
@@ -157,10 +160,10 @@ class RegistrationController extends AbstractController
         $user = $users->findOneBy(['activation_token' => $token]);
 
         // Si aucun utilisateur n'est associé à ce token
-        if(!$user){
+//        if(!$user){
             // On renvoie une erreur 404
-            throw $this->createNotFoundException('Cet utilisateur n\'existe pas');
-        }
+//            throw $this->createNotFoundException('Cet utilisateur n\'existe pas');
+//        }
 
         // On supprime le token
         $user->setActivationToken('');
@@ -171,14 +174,14 @@ class RegistrationController extends AbstractController
 
         // On génère un message
         $this->addFlash('message', 'Utilisateur activé avec succès');
-
-        //  une fois le mail confirmé, l'utilisateur se connecte
+        //l'utilisateur se connecte
         return $guardHandler->authenticateUserAndHandleSuccess(
             $user,
             $request,
             $authenticator,
             'main' // firewall name in security.yaml
         );
+
     }
 
     /**

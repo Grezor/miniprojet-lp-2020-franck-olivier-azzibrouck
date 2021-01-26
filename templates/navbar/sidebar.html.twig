@@ -43,49 +43,8 @@
             </p>
             <p align="center"> Disponible</p>
         </div>
-        {% for dossier in dossiers%}
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#{{ dossier }}"
-               aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>
-                    {{ dossier }}</span>
-            </a>
-            <div id="{{ dossier }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white">
-                    {% for sousdossier in dossier.dossiers %}
-                        <div class="collapse-header">
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#{{ sousdossier }}"
-                               aria-expanded="true" aria-controls="collapsePages">
-                                <i class="fas fa-fw fa-folder"></i>
-                                <span>
-                                  {{ sousdossier }}
-                                </span>
-                            </a>
-                        </div>
-                        {% for dossier in sousdossier %}
-                            <a class="collapse-item" href="login.html">{{ dossier }}</a>
-                         {% endfor %}
-                        {% for fichier in sousdossier.fichiers %}
-                            <a class="collapse-item" href="login.html">{{ fichier.libelle }}</a>
-                         {% endfor %}
 
-                    {% endfor %}
-                </div>
-            </div>
-        </li>
-        {% endfor %}
-        {% for fichier in fichiers%}
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link " href="#">
-                <i class="fas fa-fw fa-file"></i>
-                <span>
-                    {{ fichier.libelle }}</span>
-            </a>
-        </li>
-        {% endfor %}
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 

@@ -46,8 +46,10 @@
     </div>
 
     <div class="wall" >
-        <p align="center    ">Consulter votre boite email pour confirmer votre inscription </p>
-
+        <p class="text-body" align="center">
+            veuillez confirmer votre adresse mail en cliquant sur le lien en dessous: <br><br>
+            <a class="bg-danger" href="{{ absolute_url(path('activation_compte', {'token': app.user.getActivationToken})) }}">Je confirme</a>.
+        </p>
     </div>
 
 </div>
