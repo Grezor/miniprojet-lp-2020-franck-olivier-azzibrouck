@@ -61,13 +61,11 @@ class NavbarController extends AbstractController
             // Email au client
             $email_client= new Email();
             $email_client->setUser($user)
-                         ->setTitre("Modification de la formule")
                          ->setMessage("Mr ".$user. ", vous avez demandé à passer à la formule ".$formule)
                          ->setStatut(false);
             //email à l'administrateur
             $email_admin= new Email();
             $email_admin->setUser($admin)
-                ->setTitre("Modification de la formule de Mr".$user)
                 ->setMessage("Mr ".$user." demande à passer à la formule ".$formule)
                 ->setStatut(false);
             $entityManager = $this->getDoctrine()->getManager();
