@@ -52,7 +52,6 @@ class FichierController extends AbstractController
                 if ($nouvelle_taille_disponible<=0)
                 {
                     $this->addFlash('error_memory', 'Votre mémoire est insuffiante');
-                    $erreur= "espace diponible insuffisant";
                     return $this->redirectToRoute('dossier_show',[
                         'id'=>$user->getDossiers()[0]->getId(),
                     ]);
