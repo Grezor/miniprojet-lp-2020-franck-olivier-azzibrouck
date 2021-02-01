@@ -96,9 +96,10 @@ class User implements UserInterface
     private $choixformules;
 
     /**
-     * @ORM\OneToMany(targetEntity=Email::class, mappedBy="admin")
+     * @ORM\OneToMany(targetEntity=Email::class, mappedBy="user")
      */
     private $emails;
+
 
     public function __construct()
     {
@@ -267,7 +268,7 @@ class User implements UserInterface
      */
     public function __toString()
     {
-        return $this->email;
+        return $this->nom." ".$this->prenom;
     }
 
     /**
@@ -335,27 +336,6 @@ class User implements UserInterface
         return $this->emails;
     }
 
-    public function addEmail(Email $email): self
-    {
-        if (!$this->emails->contains($email)) {
-            $this->emails[] = $email;
-            $email->setAdmin($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEmail(Email $email): self
-    {
-        if ($this->emails->removeElement($email)) {
-            // set the owning side to null (unless already changed)
-            if ($email->getAdmin() === $this) {
-                $email->setAdmin(null);
-            }
-        }
-
-        return $this;
-    }
 
 
 }

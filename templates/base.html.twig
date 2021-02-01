@@ -33,9 +33,21 @@
                 <div id="content">
                     <!-- Topbar -->
                     {{ render(path('topbar')) }}
-{#                    les messages flash#}
+                    {#                    les messages flash#}
+                    {#  memory error#}
                     {% for flash_message in app.session.flashBag.get('erreur') %}
                         <div class="alert alert-danger" role="alert" align="center">
+                            {{ flash_message }}
+                        </div>
+                    {% endfor %}
+                    {#                    email send#}
+                    {% for flash_message in app.session.flashBag.get('email_send') %}
+                        <div class="alert alert-success" role="alert" align="center">
+                            {{ flash_message }}
+                        </div>
+                    {% endfor %}
+                    {% for flash_message in app.session.flashBag.get('error_login') %}
+                        <div class="alert alert-success" role="alert" align="center">
                             {{ flash_message }}
                         </div>
                     {% endfor %}

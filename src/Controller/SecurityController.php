@@ -14,8 +14,6 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        $not_verified="";
-
          if ($this->getUser())
          {
              if ($this->getUser()->isVerified()==false)
@@ -23,6 +21,7 @@ class SecurityController extends AbstractController
                  $this->addFlash('error_login', 'Votre compte n\'est pas actif, vérifier votre boite email');
 
              }
+             return $this->redirectToRoute('home');
 
          }
 

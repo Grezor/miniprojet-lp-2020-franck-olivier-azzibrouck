@@ -29,11 +29,6 @@
                                         <h1 class="h5 text-gray-900 mb-5"> sur le service de stockage!</h1>
                                     </div>
                                     <form class="user" method="post">
-                                        {% for message in app.flashes('error_login') %}
-                                            <div class="alert alert-success" align="center">
-                                                {{ message }}
-                                            </div>
-                                        {% endfor %}
                                         {% if error %}
                                             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                                         {% endif %}

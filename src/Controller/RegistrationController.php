@@ -75,7 +75,7 @@ class RegistrationController extends AbstractController
                 $choixformule= new Choixformule($user,$formule);
                 $choixformule->setTailleDisponible($formule->getTaille());
                 //on attribut le role à l'utilisateur
-                $user->setRoles(["ROLE_ADMIN"]);
+                $user->setRoles(["ROLE_USER"]);
                 // On génère un token et on l'enregistre
                 $user->setActivationToken(md5(uniqid()));
                 //on affecte le dossier racine à l'utilisateur
@@ -86,29 +86,30 @@ class RegistrationController extends AbstractController
                 $entityManager->persist($choixformule);
                 $entityManager->persist($dossier);
                 $entityManager->flush();
-
-                // generate a signed url and email it to the user
-                        $email= (new TemplatedEmail())
-                        ->from(new Address('support@stockage.com', 'admin'))
-                        ->to($user->getEmail())
-                        ->subject('Please Confirm your Email')
-                        ->htmlTemplate('registration/confirmation_email.html.twig')
-                        ->context([
-                            'token' => $user->getActivationToken(),
-                        ])
-                ;
-                try {
-                    $mailer->send($email);
-                } catch (TransportExceptionInterface $e) {
-
-                }
+//
+//                // generate a signed url and email it to the user
+//                        $email= (new TemplatedEmail())
+//                        ->from(new Address('support@stockage.com', 'admin'))
+//                        ->to($user->getEmail())
+//                        ->subject('Please Confirm your Email')
+//                        ->htmlTemplate('registration/confirmation_email.html.twig')
+//                        ->context([
+//                            'token' => $user->getActivationToken(),
+//                        ])
+//                ;
+//                try {
+//                    $mailer->send($email);
+//                } catch (TransportExceptionInterface $e) {
+//
+//                }
                 //l'utilisateur se connecte
                 return $guardHandler->authenticateUserAndHandleSuccess(
                     $user,
                     $request,
                     $authenticator,
                     'main' // firewall name in security.yaml
-                );            }
+                );
+            }
             //si le captcha est différent
             if(!in_array($form['captcha']->getData(),$captcha)){
                 $error="le captcha ne correspond pas";
@@ -140,7 +141,6 @@ class RegistrationController extends AbstractController
 
 
     }
-
 
     /**
      * @Route("/activation/{token}", name="activation_compte")

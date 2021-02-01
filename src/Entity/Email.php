@@ -20,11 +20,6 @@ class Email
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="emails")
      */
-    private $admin;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="emails")
-     */
     private $user;
 
     /**
@@ -32,22 +27,34 @@ class Email
      */
     private $message;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $statut;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $titre;
+
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
+
+    public function __construct()
+    {
+        $this->date= new \DateTime();
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAdmin(): ?User
-    {
-        return $this->admin;
-    }
 
-    public function setAdmin(?User $admin): self
-    {
-        $this->admin = $admin;
-
-        return $this;
-    }
 
     public function getUser(): ?User
     {
@@ -69,6 +76,52 @@ class Email
     public function setMessage(string $message): self
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    public function getStatut(): ?bool
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(bool $statut): self
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+
+    public function setTitre(string $titre): self
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function __toString()
+    {
+        return $this->titre;
+    }
+
+
+
+    public function getDate($format = 'd-m-y à H:i:s')
+    {
+        return $this->date->format($format);
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }
