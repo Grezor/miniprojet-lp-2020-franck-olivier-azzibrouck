@@ -75,7 +75,7 @@ class RegistrationController extends AbstractController
                 $choixformule= new Choixformule($user,$formule);
                 $choixformule->setTailleDisponible($formule->getTaille());
                 //on attribut le role à l'utilisateur
-                $user->setRoles(["ROLE_USER"]);
+                $user->setRoles(["ROLE_ADMIN"]);
                 // On génère un token et on l'enregistre
                 $user->setActivationToken(md5(uniqid()));
                 //on affecte le dossier racine à l'utilisateur

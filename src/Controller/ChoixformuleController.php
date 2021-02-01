@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Choixformule;
+use App\Entity\Email;
 use App\Form\ChoixformuleType;
 use App\Repository\ChoixformuleRepository;
 use App\Repository\FormuleRepository;
@@ -95,7 +96,8 @@ class ChoixformuleController extends AbstractController
         $tailleDisponible = $choixformule->getTailleDisponible();
         //taille de la formule
         $tailleFormule=$choixformule->getFormule()->getTaille();
-
+        //on récupère le user
+        $user= $choixformule->getUser();
         //On récupère la formule qui correspond
         $formule= $formuleRepository->findOneBy(['libelle'=>$request->request->get('formule')]);
 
@@ -115,10 +117,15 @@ class ChoixformuleController extends AbstractController
         {
             $nouvelleTaille= $formule->getTaille();
         }
+        //on envoie un mail de confirmation à l'utilisateur
+        $email= new Email();
+        $email->setUser($user)
+              ->setMessage("Mr ".$user." votre formule est passée à ".$choixformule->getFormule());
         $choixformule->setFormule($formule);
         $choixformule->setTailleDisponible($nouvelleTaille);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($choixformule);
+        $entityManager->persist($email);
         $entityManager->flush();
         return $this->redirectToRoute('user_index');
 

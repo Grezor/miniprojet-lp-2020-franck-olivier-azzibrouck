@@ -21,8 +21,6 @@
             <tr>
                 <td>{{ email.id }}</td>
                 <td>{{ email.message }}</td>
-                <td>{{ email.statut ? 'Yes' : 'No' }}</td>
-                <td>{{ email.titre }}</td>
                 <td>{{ email.date }}</td>
                 <td>
                     <a href="{{ path('email_show', {'id': email.id}) }}">show</a>

@@ -33,12 +33,6 @@ class Email
     private $statut;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $titre;
-
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $date;
@@ -46,6 +40,7 @@ class Email
     public function __construct()
     {
         $this->date= new \DateTime();
+        $this->statut= false;
     }
 
 
@@ -92,24 +87,12 @@ class Email
         return $this;
     }
 
-    public function getTitre(): ?string
-    {
-        return $this->titre;
-    }
-
-    public function setTitre(string $titre): self
-    {
-        $this->titre = $titre;
-
-        return $this;
-    }
-
     /**
      * @return mixed
      */
     public function __toString()
     {
-        return $this->titre;
+        return $this->message;
     }
 
 

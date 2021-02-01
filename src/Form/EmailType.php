@@ -14,7 +14,6 @@ class EmailType extends AbstractType
         $builder
             ->add('message')
             ->add('statut')
-            ->add('titre')
             ->add('user')
         ;
     }

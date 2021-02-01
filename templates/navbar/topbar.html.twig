@@ -15,13 +15,18 @@
         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
         </button>
-
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item no-arrow mx-1" >
+                <a class="nav-link overflow-auto" href="{{ path('home') }}" title="votre espace de stockage">
+                    <i class="fas fa-home fa-fw" style="font-size:30px"></i>
+                    <!-- Counter - users -->
+                </a>
+            </li>
             <!-- Nav Item - Alerts -->
             <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Liste des alertes emails">
                     <i class="fas fa-bell fa-fw" style="font-size:30px;"></i>
                     <!-- Counter - Alerts -->
                     {% for email in app.user.emails%}
@@ -60,6 +65,16 @@
                     <i class="fas fa-clipboard-list fa-fw" style="font-size:30px"></i>
                 </a>
             </li>
+            {% if is_granted( 'ROLE_USER') %}
+                <!-- Nav Item - list users -->
+                <li class="nav-item no-arrow mx-1" >
+                    <a class="nav-link overflow-auto" href="{{ path('user_index') }}" title="liste des utlisateurs">
+                        <i class="fas fa-user-friends fa-fw" style="font-size:30px"></i>
+                        <!-- Counter - users -->
+                        <span class="badge badge-danger badge-counter">{{ users|length -1}}+</span>
+                    </a>
+                </li>
+            {% endif %}
             {% if is_granted( 'ROLE_ADMIN') %}
                 <!-- Nav Item - list users -->
                 <li class="nav-item no-arrow mx-1" >
@@ -91,6 +106,7 @@
                 </div>
             </li>
 
+
         </ul>
     </nav>
     <!-- End of Topbar-->
@@ -100,7 +116,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Quitter votre seesion?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Quitter votre session?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
