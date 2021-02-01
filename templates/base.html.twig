@@ -35,8 +35,8 @@
                     {{ render(path('topbar')) }}
                     {#                    les messages flash#}
                     {#  memory error#}
-                    {% for flash_message in app.session.flashBag.get('erreur') %}
-                        <div class="alert alert-danger" role="alert" align="center">
+                    {% for flash_message in app.session.flashBag.get('error_memory') %}
+                        <div class="alert alert-danger" role="alert" align="center" onload="modifier_formule(e)">
                             {{ flash_message }}
                         </div>
                     {% endfor %}

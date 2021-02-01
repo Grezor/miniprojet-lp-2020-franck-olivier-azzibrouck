@@ -48,7 +48,16 @@ class FichierController extends AbstractController
                 //On récupère la taille de disponible dans notre memoire
                 $taille_disponible= $choixformule->getTailleDisponible();
                 $nouvelle_taille_disponible =  $taille_disponible - $filetaille ;
+                //si la memoire disponible est inférieur à zéro
+                if ($nouvelle_taille_disponible<=0)
+                {
+                    $this->addFlash('error_memory', 'Votre mémoire est insuffiante');
+                    $erreur= "espace diponible insuffisant";
+                    return $this->redirectToRoute('dossier_show',[
+                        'id'=>$dossier->getId(),
+                    ]);
 
+                }
                 //on récupere le nom du document uploader
                 $originalFilename = pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME);
                 //$safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
