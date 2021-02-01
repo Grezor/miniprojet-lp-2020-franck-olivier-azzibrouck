@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe2071ad-afba-4ae1-8045-7522f1089269" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/attente_email.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/attente_email.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/navbar/topbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar/topbar.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,11 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/navbar/topbar.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2006">
-              <caret line="118" column="84" selection-start-line="118" selection-start-column="84" selection-end-line="118" selection-end-column="84" />
+            <state relative-caret-position="273">
+              <caret line="66" column="17" selection-start-line="66" selection-start-column="17" selection-end-line="66" selection-end-column="17" />
               <folding>
                 <element signature="e#794#798#0#Twig" expanded="true" />
               </folding>
@@ -73,7 +72,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/registration/attente_email.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="347">
@@ -205,8 +204,8 @@
         <option value="$PROJECT_DIR$/src/Controller/ChoixformuleController.php" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/src/Controller/RegistrationController.php" />
-        <option value="$PROJECT_DIR$/templates/navbar/topbar.html.twig" />
         <option value="$PROJECT_DIR$/templates/registration/attente_email.html.twig" />
+        <option value="$PROJECT_DIR$/templates/navbar/topbar.html.twig" />
       </list>
     </option>
   </component>
@@ -481,12 +480,12 @@
       <workItem from="1609922970395" duration="24000" />
       <workItem from="1610015588047" duration="10520000" />
       <workItem from="1611224777366" duration="25096000" />
-      <workItem from="1612097331660" duration="24941000" />
+      <workItem from="1612097331660" duration="25218000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="316149000" />
+    <option name="totallyTimeSpent" value="316426000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -501,7 +500,7 @@
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49463806" visible="true" weight="0.19865772" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49463806" visible="true" weight="0.19865772" />
       <window_info id="Structure" order="1" sideWeight="0.504" side_tool="true" weight="0.12550336" />
       <window_info id="Favorites" order="2" sideWeight="0.5053619" side_tool="true" weight="0.18255034" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -979,16 +978,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/navbar/topbar.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2006">
-          <caret line="118" column="84" selection-start-line="118" selection-start-column="84" selection-end-line="118" selection-end-column="84" />
-          <folding>
-            <element signature="e#794#798#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/NavbarController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
@@ -1003,6 +992,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="347">
           <caret line="50" column="42" selection-start-line="50" selection-start-column="42" selection-end-line="50" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/navbar/topbar.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="66" column="17" selection-start-line="66" selection-start-column="17" selection-end-line="66" selection-end-column="17" />
+          <folding>
+            <element signature="e#794#798#0#Twig" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

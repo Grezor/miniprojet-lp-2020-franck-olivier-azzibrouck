@@ -65,16 +65,6 @@
                     <i class="fas fa-clipboard-list fa-fw" style="font-size:30px"></i>
                 </a>
             </li>
-            {% if is_granted( 'ROLE_USER') %}
-                <!-- Nav Item - list users -->
-                <li class="nav-item no-arrow mx-1" >
-                    <a class="nav-link overflow-auto" href="{{ path('user_index') }}" title="liste des utlisateurs">
-                        <i class="fas fa-user-friends fa-fw" style="font-size:30px"></i>
-                        <!-- Counter - users -->
-                        <span class="badge badge-danger badge-counter">{{ users|length -1}}+</span>
-                    </a>
-                </li>
-            {% endif %}
             {% if is_granted( 'ROLE_ADMIN') %}
                 <!-- Nav Item - list users -->
                 <li class="nav-item no-arrow mx-1" >
