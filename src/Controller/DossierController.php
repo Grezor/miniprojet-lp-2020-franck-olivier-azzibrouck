@@ -100,8 +100,7 @@ class DossierController extends AbstractController
                 //si la memoire disponible est inférieur à zéro
                 if ($nouvelle_taille_disponible<=0)
                 {
-                    $this->addFlash('erreur', 'Votre mémoire est insuffiante');
-                    $erreur= "espace diponible insuffisant";
+                    $this->addFlash('error_memory', 'Votre mémoire est insuffiante');
                     return $this->redirectToRoute('dossier_show',[
                         'id'=>$dossier->getId(),
                     ]);
