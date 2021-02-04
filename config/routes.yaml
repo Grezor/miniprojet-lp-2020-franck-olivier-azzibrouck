@@ -1,10 +1,18 @@
-###dossier delete
-#dossier_delete:
-#  path: /dossier/{id}
-#  controller: App\Controller\DossierController::delete
-#
-###dossier show
-#dossier_show:
-#  path: /dossier/{id}
-#  controller: App\Controller\DossierController::show
-#
+##login
+app_login:
+  path: /
+    controller: App\Controller\SecurityController::login
+##Register
+app_register:
+  path: /register
+    controller: App\Controller\RegistrationController::register
+##dossier delete
+dossier_delete:
+  path: /dossier/{id}
+  controller: App\Controller\DossierController::delete
+
+##dossier show
+dossier_show:
+  path: /dossier/{id}
+  controller: App\Controller\DossierController::show
+
