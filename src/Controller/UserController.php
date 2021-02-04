@@ -87,7 +87,6 @@ class UserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
             $entityManager->flush();
-
         }
 
         return $this->redirectToRoute('/');
