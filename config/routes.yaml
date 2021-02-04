@@ -1,10 +1,10 @@
-##login
+##home
 app_login:
-  path: /
-    controller: App\Controller\SecurityController::login
+  path: /home/
+    controller: App\Controller\HomeController::home
 ##Register
 app_register:
-  path: /register
+  path: /register/
     controller: App\Controller\RegistrationController::register
 ##dossier delete
 dossier_delete:
