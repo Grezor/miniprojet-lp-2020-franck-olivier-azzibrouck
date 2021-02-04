@@ -1,18 +1,18 @@
-##home
-app_login:
-  path: /home/
-    controller: App\Controller\HomeController::home
-##Register
-app_register:
-  path: /register/
-    controller: App\Controller\RegistrationController::register
-##dossier delete
-dossier_delete:
-  path: /dossier/{id}
-  controller: App\Controller\DossierController::delete
-
-##dossier show
-dossier_show:
-  path: /dossier/{id}
-  controller: App\Controller\DossierController::show
-
+###home
+#app_login:
+#  path: /home/
+#    controller: App\Controller\HomeController::home
+###Register
+#app_register:
+#  path: /register/
+#    controller: App\Controller\RegistrationController::register
+###dossier delete
+#dossier_delete:
+#  path: /dossier/{id}
+#  controller: App\Controller\DossierController::delete
+#
+###dossier show
+#dossier_show:
+#  path: /dossier/{id}
+#  controller: App\Controller\DossierController::show
+#
