@@ -1,3 +1,5 @@
+{% block body %}
+
                     {#  memory error#}
                     {% for flash_message in app.session.flashBag.get('error_memory') %}
                         <div  id="error_memory" class="alert alert-danger" role="alert" align="center" onloadedmetadata="modifier_formule()">
@@ -21,3 +23,4 @@
                             {{ flash_message }}
                         </div>
                     {% endfor %}
+{% endblock %}

@@ -33,6 +33,7 @@ class FichierType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Fichier::class,
+            'csrf_protection'=>false
         ]);
     }
 }
