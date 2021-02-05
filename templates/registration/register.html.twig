@@ -7,9 +7,7 @@
           rel="stylesheet">
 {% endblock %}
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
+ {{ include('flash_message/index.html.twig') }}
 
 <body class="bg-gradient-primary">
 

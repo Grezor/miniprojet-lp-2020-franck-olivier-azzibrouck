@@ -112,7 +112,8 @@ class RegistrationController extends AbstractController
             }
             //si le captcha est différent
             if(!in_array($form['captcha']->getData(),$captcha)){
-                $error="le captcha ne correspond pas";
+                $this->addFlash('error_captcha', 'le captcha ne correspond pas.');
+
                 return $this->render('registration/register.html.twig', [
                     'registrationForm' => $form->createView(),
                     'error'=>$error

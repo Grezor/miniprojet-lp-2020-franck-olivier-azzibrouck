@@ -39,23 +39,7 @@
                     <!-- Topbar -->
                     {{ render(path('topbar')) }}
                     {#                    les messages flash#}
-                    {#  memory error#}
-                    {% for flash_message in app.session.flashBag.get('error_memory') %}
-                        <div  id="error_memory" class="alert alert-danger" role="alert" align="center" onloadedmetadata="modifier_formule()">
-                          {{ flash_message }}
-                        </div>
-                    {% endfor %}
-                    {#                    email send#}
-                    {% for flash_message in app.session.flashBag.get('email_send') %}
-                        <div class="alert alert-success" role="alert" align="center">
-                            {{ flash_message }}
-                        </div>
-                    {% endfor %}
-                    {% for flash_message in app.session.flashBag.get('error_login') %}
-                        <div class="alert alert-success" role="alert" align="center">
-                            {{ flash_message }}
-                        </div>
-                    {% endfor %}
+                   {{ include('flash_message/index.html.twig') }}
 {#                    fin messages flash#}
                     {% block body %}{% endblock %}
                     {% block javascripts %}
